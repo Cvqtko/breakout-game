@@ -18,18 +18,18 @@ public class TheApp extends PApplet {
 		frameRate(30);
 		InteractiveGameBuilder builder = new InteractiveGameBuilder();
 		GUIComponent.construct(this, builder);
-		interactiveCounter = builder.getComponent();
+		interactiveComponent = builder.getComponent();
 	}
 
 	@Override
 	public void draw() { // draw() loops forever, until stopped
 		background(204);
-		interactiveCounter.update();
+		interactiveComponent.update();
 	}
 
 	@Override
 	public void mouseDragged() {
-		interactiveCounter.handleMouseDragEvent(width, mouseX);
+		interactiveComponent.handleMouseDragEvent(width, mouseX);
 	}
 
 }
