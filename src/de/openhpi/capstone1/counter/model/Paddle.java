@@ -3,8 +3,12 @@ package de.openhpi.capstone1.counter.model;
 import processing.core.PApplet;
 
 public class Paddle {
-	public float positionX = 0;
-	public float centerX;
+	private float positionX = 0;
+	private float centerX;
+
+	public float getCenterX() {
+		return centerX;
+	}
 
 	public void updatePosition(int width, float mouseX) {
 

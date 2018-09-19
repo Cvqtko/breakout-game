@@ -4,12 +4,12 @@ import processing.core.PApplet;
 import processing.core.PImage;
 
 public class Ball {
-	PImage img;
-	public float velocityX = 10, velocityY = 10;
-	public float x;
-	public float y;
-	public float centerX;
-	PApplet display;
+	private PImage img;
+	private float velocityX = 10, velocityY = 10;
+	private float x;
+	private float y;
+	private float centerX;
+	private PApplet display;
 
 	public Ball(float x, float y, PApplet display) {
 		this.x = x;
@@ -34,8 +34,9 @@ public class Ball {
 		if (y > display.height - 45) {
 			// Checks the distance between the paddle center and the ball center
 			// The paddle width is 100 and the ball is 24
-			System.out.println("Distance between paddle and ball centers = " + Math.abs(paddle.centerX - (x + img.width / 2)));
-			if (Math.abs(paddle.centerX - (x + img.width / 2)) > 62) {
+			System.out.println(
+					"Distance between paddle and ball centers = " + Math.abs(paddle.getCenterX() - (x + img.width / 2)));
+			if (Math.abs(paddle.getCenterX() - (x + img.width / 2)) > 62) {
 				this.display.noLoop();
 			}
 		}
