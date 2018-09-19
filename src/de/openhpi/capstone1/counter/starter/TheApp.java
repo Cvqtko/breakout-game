@@ -6,7 +6,7 @@ import de.openhpi.capstone1.counter.builder.InteractiveGameBuilder;
 import processing.core.PApplet;
 
 public class TheApp extends PApplet {
-	InteractiveComponent interactiveCounter;
+	InteractiveComponent interactiveComponent;
 
 	@Override
 	public void settings() {
