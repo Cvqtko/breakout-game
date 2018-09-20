@@ -21,7 +21,7 @@ public class BallMovementView extends AbstractView {
 	public void update() {
 		ball.move();
 		display.fill(244, 79, 65);
-		display.ellipse(ball.getxPos(), ball.getyPos(), ball.ballRadius * 2, ball.ballRadius * 2);
+		display.ellipse(ball.getxPos(), ball.getyPos(), ball.getWidth(), ball.getHeight());
 		ball.checkForCollisionWithBrick(brick);
 		ball.checkForCollisionWithPaddle(paddle);
 		ball.checkForCollisionWithDisplay(display);
