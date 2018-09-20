@@ -1,13 +1,13 @@
 package de.openhpi.capstone1.counter.model;
 
 public class AbstractGameComponent {
-	protected int xPos;
-	protected int yPos;
-	protected int width;
-	protected int height;
-	protected float centerX;
-	protected float centerY;
-	protected boolean isVisible;
+	private int xPos;
+	private int yPos;
+	private int width;
+	private int height;
+	private float centerX;
+	private float centerY;
+	private boolean isVisible;
 
 	public AbstractGameComponent(int xPos, int yPos, int width, int height, boolean isVisible) {
 		this.xPos = xPos;

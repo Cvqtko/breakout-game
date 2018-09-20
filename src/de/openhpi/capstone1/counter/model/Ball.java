@@ -4,34 +4,33 @@ import processing.core.PApplet;
 
 public class Ball extends AbstractGameComponent {
 
-	private float velocityX = 10;
-	private float velocityY = 10;
-	public int ballRadius;
+	private int velocityX = 10;
+	private int velocityY = 10;
+	public int radius;
 
 	public Ball(int xPos, int yPos, int width, int height, boolean isVisible) {
 		super(xPos, yPos, width, height, isVisible);
-		this.ballRadius = width / 2;
-		this.centerX = xPos;
-		this.centerY = yPos;
+		this.radius = width / 2;
+
 	}
 
 	public void move() {
-		xPos += velocityX;
-		yPos += velocityY;
-		this.centerX = xPos + ballRadius;
-		this.centerY = yPos + ballRadius;
+		this.setxPos(this.getxPos() + this.velocityX);
+		this.setyPos(this.getyPos() + this.velocityY);
+		this.setCenterX(this.getxPos());
+		this.setCenterY(this.getyPos());
 	}
 
 	public void checkForCollisionWithDisplay(PApplet display) {
-		if (xPos <= ballRadius || xPos > display.width - this.width) {
+		if (this.getxPos() <= this.radius || this.getxPos() > display.width - this.getWidth()) {
 			velocityX *= -1; // Change ball movement direction
 		}
-		if (yPos <= ballRadius) {
+		if (this.getyPos() <= radius) {
 			velocityY *= -1; // Change ball movement direction
 		}
 		// if ball goes below the display height and hasn't hit the paddle - stop the
 		// game
-		if (yPos > display.height) {
+		if (this.getyPos() > display.height) {
 			display.noLoop();
 			// velocityY *= -1;
 		}
@@ -39,20 +38,36 @@ public class Ball extends AbstractGameComponent {
 
 	public void checkForCollisionWithPaddle(Paddle paddle) {
 
-		if (yPos + this.ballRadius >= paddle.yPos) {
-			if (Math.abs(paddle.getCenterX() - this.centerX) < paddle.getWidth() / 2 + this.width / 2) {
+		if (this.getyPos() + this.radius >= paddle.getyPos()) {
+			if (Math.abs(paddle.getCenterX() - this.getCenterX()) < paddle.getWidth() / 2 + this.getWidth() / 2) {
 				velocityY *= -1;
 			}
 		}
 	}
 
 	public void checkForCollisionWithBrick(Brick brick) {
+
 		if (brick.getVisible()) {
-			if (Math.sqrt(Math.pow((brick.getCenterX() - xPos), 2) + Math.pow((brick.getCenterY() - yPos), 2)) < 20) {
-				brick.setVisible(false);
-				System.out.println("Distance between brick and ball centers = " + Math
-						.sqrt(Math.pow((brick.getCenterX() - xPos), 2) + Math.pow((brick.getCenterY() - yPos), 2)));
+			if (this.getCenterX() >= brick.getCenterX() - brick.getWidth() / 2
+					&& this.getCenterX() <= brick.getCenterX() + brick.getWidth() / 2) {
+				if (Math.abs(this.getCenterY() - brick.getCenterY()) <= this.getHeight() / 2 + brick.getHeight() / 2) {
+					System.out.println("down colision " + (this.getCenterY() - brick.getCenterY()));
+					velocityY *= -1;
+					 brick.setVisible(false);
+				}
+			} else if (this.getCenterY() >= brick.getCenterY() - brick.getHeight() / 2
+					&& this.getCenterY() <= brick.getCenterY() + brick.getHeight() / 2) {
+				if (Math.abs(this.getCenterX() - brick.getCenterX()) <= this.getWidth() / 2 + brick.getWidth() / 2) {
+					System.out.println("side colision " + (this.getCenterX() - brick.getCenterX()));
+					velocityX *= -1;
+					brick.setVisible(false);
+				}
+
+			} else if (Math.abs(brick.getCenterX() - this.getCenterX()) < this.getWidth() / 2 + brick.getWidth() / 2
+					&& Math.abs(brick.getCenterY() - this.getCenterY()) < this.getHeight() + brick.getHeight() / 2) {
+				velocityY *= -1;
 				velocityX *= -1;
+				brick.setVisible(false);
 			}
 		}
 	}

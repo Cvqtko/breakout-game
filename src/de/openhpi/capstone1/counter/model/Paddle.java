@@ -8,13 +8,13 @@ public class Paddle extends AbstractGameComponent {
 
 	public void move(int displayWidth, int mouseX) {
 		if (mouseX < 0) {
-			xPos = 0;
-		} else if (mouseX > displayWidth - width) {
-			xPos = displayWidth - width;
+			this.setxPos(0);
+		} else if (mouseX > displayWidth - this.getWidth()) {
+			this.setxPos(displayWidth - this.getWidth());
 		} else {
-			xPos = mouseX;
+			this.setxPos(mouseX);
 		}
-		this.centerX = xPos + width / 2;
+		this.setCenterX(this.getxPos() + this.getWidth() / 2);
 	}
 
 }

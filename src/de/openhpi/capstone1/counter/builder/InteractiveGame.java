@@ -22,8 +22,8 @@ public class InteractiveGame extends InteractiveComponent {
 
 	public void addModel(PApplet display) {
 		paddle = new Paddle(0, display.height - 20, 100, 10, true);
-		ball = new Ball(360, 60, 20, 20, true);
-		brick = new Brick(25, 75, 50, 40, true);
+		ball = new Ball(10, 10, 20, 20, true);
+		brick = new Brick(170, 100, 50, 40, true);
 		gameController = new GameController(paddle);
 	}
 
