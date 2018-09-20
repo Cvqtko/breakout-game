@@ -13,7 +13,13 @@ public class PaddleMovementView extends AbstractView {
 
 	@Override
 	public void update() {
-		paddle.move(display);
+		float x = paddle.getxPos();
+		int y = paddle.getyPos();
+		int paddleWidth = paddle.getWidth();
+		int paddleHeight = paddle.getHeight();
 
+		display.background(204);
+		display.fill(0);
+		display.rect(x, y, paddleWidth, paddleHeight);
 	}
 }

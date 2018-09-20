@@ -10,7 +10,7 @@ public class GameController implements Controller {
 		this.paddle = paddle;
 	}
 
-	public void handleMouseDragEvent(int width, int mouseX) {
-		paddle.updatePosition(width, mouseX);
+	public void handleMouseDragEvent(int displayWidth, int mouseX) {
+		paddle.move(displayWidth, mouseX);
 	}
 }
