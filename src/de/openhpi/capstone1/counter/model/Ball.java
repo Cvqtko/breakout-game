@@ -4,8 +4,8 @@ import processing.core.PApplet;
 
 public class Ball extends AbstractGameComponent {
 
-	private int velocityX = 5;
-	private int velocityY = 5;
+	private int velocityX = 10;
+	private int velocityY = 10;
 	public int radius;
 
 	public Ball(int xPos, int yPos, int width, int height, boolean isVisible) {
@@ -30,7 +30,7 @@ public class Ball extends AbstractGameComponent {
 		}
 		// if ball goes below the display height and hasn't hit the paddle - stop the
 		// game
-		if (this.getyPos() > display.height) {
+		if (this.getyPos() > display.height - this.getHeight()) {
 			display.noLoop();
 			// velocityY *= -1;
 		}
