@@ -73,7 +73,7 @@ public class GameController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
-				brick.setVisible(false);
+				brick.hasBeenHit();
 			} else if (Math.pow((ball.getCenterX() - verBx), 2) + Math.pow((ball.getCenterY() - verBy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
 				if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
@@ -86,7 +86,7 @@ public class GameController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
-				brick.setVisible(false);
+				brick.hasBeenHit();
 			} else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
 				if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
@@ -98,7 +98,7 @@ public class GameController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
-				brick.setVisible(false);
+				brick.hasBeenHit();
 			} else if (Math.pow((ball.getCenterX() - verDx), 2) + Math.pow((ball.getCenterY() - verDy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
 				// System.out.println("vertex collision vith vertex D");
@@ -112,19 +112,19 @@ public class GameController implements Controller {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 
 				}
-				brick.setVisible(false);
+				brick.hasBeenHit();
 			} else if (ball.getCenterX() >= brick.getCenterX() - brick.getWidth() / 2
 					&& ball.getCenterX() <= brick.getCenterX() + brick.getWidth() / 2) {
 				if (Math.abs(ball.getCenterY() - brick.getCenterY()) <= ball.getHeight() / 2 + brick.getHeight() / 2) {
 					ball.setVelocityY(ball.getVelocityY() * -1);
-					brick.setVisible(false);
+					brick.hasBeenHit();
 				}
 			} else if (ball.getCenterY() >= brick.getCenterY() - brick.getHeight() / 2
 					&& ball.getCenterY() <= brick.getCenterY() + brick.getHeight() / 2) {
 				if (Math.abs(ball.getCenterX() - brick.getCenterX()) <= ball.getWidth() / 2 + brick.getWidth() / 2) {
 
 					ball.setVelocityX(ball.getVelocityX() * -1);
-					brick.setVisible(false);
+					brick.hasBeenHit();
 				}
 
 			}

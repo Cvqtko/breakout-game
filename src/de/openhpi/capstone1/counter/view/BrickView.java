@@ -17,27 +17,10 @@ public class BrickView extends AbstractView {
 	public void update() {
 		for (Brick brick : bricks) {
 			if (brick.getVisible()) {
-				display.fill(0);
+				display.fill(brick.getColor());
 				display.rect(brick.getxPos(), brick.getyPos(), brick.getWidth(), brick.getHeight());
 			}
 		}
 	}
-
-	// protected Brick brick;
-	//
-	// public BrickView(PApplet display, Brick brick) {
-	// super(display);
-	// this.brick = brick;
-	//
-	// }
-	//
-	// @Override
-	// public void update() {
-	//
-	// if (brick.getVisible()) {
-	// display.fill(0);
-	// display.rect(brick.getxPos(), brick.getyPos(), brick.getWidth(),
-	// brick.getHeight());
-	// }
 
 }
