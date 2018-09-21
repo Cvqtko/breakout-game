@@ -30,7 +30,7 @@ public class Ball extends AbstractGameComponent {
 		}
 		// if ball goes below the display height and hasn't hit the paddle - stop the
 		// game
-		if (this.getyPos() > display.height - this.getHeight()) {
+		if (this.getyPos() > display.height) {
 			display.noLoop();
 			// velocityY *= -1;
 		}
@@ -67,6 +67,14 @@ public class Ball extends AbstractGameComponent {
 				velocityY *= -1;
 			}
 
+		} else if (this.getCenterY() >= paddle.getCenterY() - paddle.getHeight() / 2
+				&& this.getCenterY() <= paddle.getCenterY() + paddle.getHeight() / 2) {
+			if (Math.abs(this.getCenterX() - paddle.getCenterX()) <= this.getWidth() / 2 + paddle.getWidth() / 2) {
+				// System.out.println("left/right colision " + (this.getCenterX() -
+				// brick.getCenterX()));
+				velocityX *= -1;
+				// brick.setVisible(false);
+			}
 		}
 
 	}
