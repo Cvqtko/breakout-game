@@ -42,14 +42,8 @@ public class Ball extends AbstractGameComponent {
 		float verDx = paddle.getCenterX() - paddle.getWidth() / 2;
 		float verDy = paddle.getCenterY() - paddle.getHeight() / 2;
 
-		if (this.getCenterX() >= paddle.getCenterX() - paddle.getWidth() / 2
-				&& this.getCenterX() <= paddle.getCenterX() + paddle.getWidth() / 2) {
-			if (Math.abs(this.getCenterY() - paddle.getCenterY()) <= this.getHeight() / 2 + paddle.getHeight() / 2) {
-				velocityY *= -1;
-				// brick.setVisible(false);
-			}
-		} else if (Math.pow((this.getCenterX() - verCx), 2) + Math.pow((this.getCenterY() - verCy), 2) < Math
-				.pow(this.radius, 2)) {
+		if (Math.pow((this.getCenterX() - verCx), 2) + Math.pow((this.getCenterY() - verCy), 2) < Math.pow(this.radius,
+				2)) {
 			// System.out.println("Paddle vertex collision vith vertex C");
 			if (velocityX < 0 && velocityY > 0) {
 				velocityX *= -1;
@@ -66,7 +60,12 @@ public class Ball extends AbstractGameComponent {
 			} else if (velocityX < 0 && velocityY > 0) {
 				velocityY *= -1;
 			}
-
+		} else if (this.getCenterX() >= paddle.getCenterX() - paddle.getWidth() / 2
+				&& this.getCenterX() <= paddle.getCenterX() + paddle.getWidth() / 2) {
+			if (Math.abs(this.getCenterY() - paddle.getCenterY()) <= this.getHeight() / 2 + paddle.getHeight() / 2) {
+				velocityY *= -1;
+				// brick.setVisible(false);
+			}
 		} else if (this.getCenterY() >= paddle.getCenterY() - paddle.getHeight() / 2
 				&& this.getCenterY() <= paddle.getCenterY() + paddle.getHeight() / 2) {
 			if (Math.abs(this.getCenterX() - paddle.getCenterX()) <= this.getWidth() / 2 + paddle.getWidth() / 2) {
@@ -76,7 +75,6 @@ public class Ball extends AbstractGameComponent {
 				// brick.setVisible(false);
 			}
 		}
-
 	}
 
 	public void checkForCollisionWithBrick(Brick brick) {
