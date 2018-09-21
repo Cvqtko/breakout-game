@@ -21,7 +21,7 @@ public class GameController implements Controller {
 
 	public void handleMouseDragEvent(int mouseX) {
 		paddle.move(display.width, mouseX);
-		checkForColisionBallAndPaddle();
+
 	}
 
 	@Override
