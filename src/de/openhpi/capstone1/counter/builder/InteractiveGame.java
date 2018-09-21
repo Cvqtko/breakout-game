@@ -4,6 +4,7 @@ import de.openhpi.capstone1.counter.controller.Controller;
 import de.openhpi.capstone1.counter.controller.GameController;
 import de.openhpi.capstone1.counter.model.Ball;
 import de.openhpi.capstone1.counter.model.Brick;
+import de.openhpi.capstone1.counter.model.BrickFactory;
 import de.openhpi.capstone1.counter.model.Paddle;
 import de.openhpi.capstone1.counter.view.AbstractView;
 import de.openhpi.capstone1.counter.view.BallView;
@@ -15,17 +16,19 @@ public class InteractiveGame extends InteractiveComponent {
 	Controller gameController;
 	Ball ball;
 	Paddle paddle;
-	Brick brick;
+	Brick[] bricks;
 	PApplet display;
+	BrickFactory brickFactory;
 
 	public InteractiveGame() {
 	}
 
 	public void addModel(PApplet display) {
 		paddle = new Paddle(0, display.height - 20, 100, 10, true);
-		ball = new Ball(20, 20, 20, 20, true);
-		brick = new Brick(170, 100, 220, 40, true);
-		gameController = new GameController(ball, paddle, brick, display);
+		ball = new Ball(300, 300, 20, 20, true);
+		brickFactory = new BrickFactory();
+		bricks = brickFactory.getBricks();
+		gameController = new GameController(ball, paddle, bricks, display);
 		this.display = display;
 	}
 
@@ -33,11 +36,11 @@ public class InteractiveGame extends InteractiveComponent {
 		views = new AbstractView[3];
 		views[0] = new PaddleView(display, paddle);
 		views[1] = new BallView(display, ball);
-		views[2] = new BrickView(display, brick);
+		views[2] = new BrickView(display, bricks);
 	}
 
 	public void addController() {
-		gameController = new GameController(ball, paddle, brick, display);
+		gameController = new GameController(ball, paddle, bricks, display);
 	}
 
 	@Override

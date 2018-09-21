@@ -2,8 +2,8 @@ package de.openhpi.capstone1.counter.model;
 
 public class Ball extends AbstractGameComponent {
 
-	private int velocityX = 10;
-	private int velocityY = 10;
+	private int velocityX = 5;
+	private int velocityY = 5;
 	private int radius;
 
 	public Ball(int xPos, int yPos, int width, int height, boolean isVisible) {
