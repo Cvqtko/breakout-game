@@ -21,17 +21,17 @@ public class GameController implements Controller {
 
 	public void handleMouseDragEvent(int mouseX) {
 		paddle.move(display.width, mouseX);
-		checkForColisionBallAndPaddle(ball, paddle);
+		checkForColisionBallAndPaddle();
 	}
 
 	@Override
 	public void checkForCollisions() {
-		checkForCollisionBallAndDisplay(ball, display);
-		checkForCollisionBallAndBrick(ball, brick);
-		checkForColisionBallAndPaddle(ball, paddle);
+		checkForCollisionBallAndDisplay();
+		checkForCollisionBallAndBrick();
+		checkForColisionBallAndPaddle();
 	}
 
-	private void checkForCollisionBallAndDisplay(Ball ball, PApplet display) {
+	private void checkForCollisionBallAndDisplay() {
 		if (ball.getxPos() <= ball.getRadius() || ball.getxPos() > display.width - ball.getWidth()) {
 
 			ball.setVelocityX(ball.getVelocityX() * -1); // Change ball movement direction
@@ -46,7 +46,7 @@ public class GameController implements Controller {
 		}
 	}
 
-	private void checkForCollisionBallAndBrick(Ball ball, Brick brick) {
+	private void checkForCollisionBallAndBrick() {
 		float verAx = brick.getCenterX() - brick.getWidth() / 2;
 		float verAy = brick.getCenterY() + brick.getHeight() / 2;
 		float verBx = brick.getCenterX() + brick.getWidth() / 2;
@@ -125,7 +125,7 @@ public class GameController implements Controller {
 
 	}
 
-	private void checkForColisionBallAndPaddle(Ball ball, Paddle paddle) {
+	private void checkForColisionBallAndPaddle() {
 		float verCx = paddle.getCenterX() + paddle.getWidth() / 2;
 		float verCy = paddle.getCenterY() - paddle.getHeight() / 2;
 		float verDx = paddle.getCenterX() - paddle.getWidth() / 2;
