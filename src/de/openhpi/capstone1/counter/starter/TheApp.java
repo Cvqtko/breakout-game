@@ -29,7 +29,7 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void mouseDragged() {
-		interactiveComponent.handleMouseDragEvent(width, mouseX);
+		interactiveComponent.handleMouseDragEvent(mouseX);
 	}
 
 }
