@@ -4,6 +4,7 @@ public class Brick extends AbstractGameComponent {
 
 	private int hitCounter;
 	private int color;
+	private int points;
 
 	public Brick(int xPos, int yPos, int width, int height, boolean isVisible) {
 		super(xPos, yPos, width, height, isVisible);
@@ -11,7 +12,7 @@ public class Brick extends AbstractGameComponent {
 		this.setCenterY(yPos + height / 2);
 		this.hitCounter = 0;
 		this.color = 0;
-
+		this.points = 10;
 	}
 
 	public void hasBeenHit() {
@@ -20,6 +21,11 @@ public class Brick extends AbstractGameComponent {
 			this.setVisible(false);
 		}
 		this.color = 112;
+		this.points = 30;
+	}
+
+	public int getPoints() {
+		return points;
 	}
 
 	public int getColor() {

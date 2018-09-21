@@ -2,6 +2,7 @@ package de.openhpi.capstone1.counter.controller;
 
 import de.openhpi.capstone1.counter.model.Ball;
 import de.openhpi.capstone1.counter.model.Brick;
+import de.openhpi.capstone1.counter.model.Counter;
 import de.openhpi.capstone1.counter.model.Paddle;
 import processing.core.PApplet;
 
@@ -11,12 +12,14 @@ public class GameController implements Controller {
 	Ball ball;
 	Brick[] bricks;
 	PApplet display;
+	Counter counter;
 
-	public GameController(Ball ball, Paddle paddle, Brick[] bricks, PApplet display) {
+	public GameController(Ball ball, Paddle paddle, Brick[] bricks, Counter counter, PApplet display) {
 		this.ball = ball;
 		this.paddle = paddle;
 		this.bricks = bricks;
 		this.display = display;
+		this.counter = counter;
 	}
 
 	public void handleMouseDragEvent(int mouseX) {
@@ -63,7 +66,6 @@ public class GameController implements Controller {
 
 			if (Math.pow((ball.getCenterX() - verAx), 2) + Math.pow((ball.getCenterY() - verAy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
-
 				if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
 					ball.setVelocityX(ball.getVelocityX() * -1);
 					ball.setVelocityY(ball.getVelocityY() * -1);
@@ -73,6 +75,7 @@ public class GameController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
+				counter.updateCount(brick.getPoints());
 				brick.hasBeenHit();
 			} else if (Math.pow((ball.getCenterX() - verBx), 2) + Math.pow((ball.getCenterY() - verBy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
@@ -86,6 +89,7 @@ public class GameController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
+				counter.updateCount(brick.getPoints());
 				brick.hasBeenHit();
 			} else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
@@ -98,10 +102,11 @@ public class GameController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
+				counter.updateCount(brick.getPoints());
 				brick.hasBeenHit();
 			} else if (Math.pow((ball.getCenterX() - verDx), 2) + Math.pow((ball.getCenterY() - verDy), 2) < Math
 					.pow(ball.getRadius(), 2)) {
-				// System.out.println("vertex collision vith vertex D");
+
 				if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
 					ball.setVelocityX(ball.getVelocityX() * -1);
 					ball.setVelocityY(ball.getVelocityY() * -1);
@@ -112,19 +117,24 @@ public class GameController implements Controller {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 
 				}
+				counter.updateCount(brick.getPoints());
 				brick.hasBeenHit();
 			} else if (ball.getCenterX() >= brick.getCenterX() - brick.getWidth() / 2
 					&& ball.getCenterX() <= brick.getCenterX() + brick.getWidth() / 2) {
 				if (Math.abs(ball.getCenterY() - brick.getCenterY()) <= ball.getHeight() / 2 + brick.getHeight() / 2) {
 					ball.setVelocityY(ball.getVelocityY() * -1);
+					counter.updateCount(brick.getPoints());
 					brick.hasBeenHit();
+
 				}
 			} else if (ball.getCenterY() >= brick.getCenterY() - brick.getHeight() / 2
 					&& ball.getCenterY() <= brick.getCenterY() + brick.getHeight() / 2) {
 				if (Math.abs(ball.getCenterX() - brick.getCenterX()) <= ball.getWidth() / 2 + brick.getWidth() / 2) {
 
 					ball.setVelocityX(ball.getVelocityX() * -1);
+					counter.updateCount(brick.getPoints());
 					brick.hasBeenHit();
+
 				}
 
 			}
