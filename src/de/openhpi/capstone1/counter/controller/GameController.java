@@ -24,7 +24,7 @@ public class GameController implements Controller {
 
 	public void handleMouseDragEvent(int mouseX) {
 		paddle.move(display.width, mouseX);
-
+		checkForColisionBallAndPaddle();
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class GameController implements Controller {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 					counter.updateCount(brick.getPoints());
 					brick.hasBeenHit();
-
+					System.out.println();
 				}
 			} else if (ball.getCenterY() >= brick.getCenterY() - brick.getHeight() / 2
 					&& ball.getCenterY() <= brick.getCenterY() + brick.getHeight() / 2) {
@@ -174,7 +174,7 @@ public class GameController implements Controller {
 			} else {
 				ball.setVelocityY(ball.getVelocityY() * -1);
 			}
-		}else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) < Math
+		} else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) < Math
 				.pow(ball.getRadius(), 2)) {
 			if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
 
@@ -195,18 +195,13 @@ public class GameController implements Controller {
 			} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
 				ball.setVelocityY(ball.getVelocityY() * -1);
 			}
-		} else if (ball.getCenterY() >= paddle.getCenterY() - paddle.getHeight() / 2
-				&& ball.getCenterY() <= paddle.getCenterY() + paddle.getHeight() / 2) {
-			if (Math.abs(ball.getCenterX() - paddle.getCenterX()) <= ball.getWidth() / 2 + paddle.getWidth() / 2) {
-
-				ball.setVelocityX(ball.getVelocityX() * -1);
-
-			}
 		} else if (ball.getCenterX() >= paddle.getCenterX() - paddle.getWidth() / 2
 				&& ball.getCenterX() <= paddle.getCenterX() + paddle.getWidth() / 2) {
 			if (Math.abs(ball.getCenterY() - paddle.getCenterY()) <= ball.getHeight() / 2 + paddle.getHeight() / 2) {
-				ball.setVelocityY(ball.getVelocityY() * -1);
-
+				if (ball.getVelocityY() > 0 && ball.getyPos() + ball.getHeight() < paddle.getCenterX()) {
+					System.out.println("up/down collision");
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				}
 			}
 		}
 	}
