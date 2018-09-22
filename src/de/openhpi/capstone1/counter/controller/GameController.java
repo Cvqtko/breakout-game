@@ -168,17 +168,17 @@ public class GameController implements Controller {
 			} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
 				ball.setVelocityY(ball.getVelocityY() * -1);
 			}
-		} else if (ball.getCenterX() >= paddle.getCenterX() - paddle.getWidth() / 2
-				&& ball.getCenterX() <= paddle.getCenterX() + paddle.getWidth() / 2) {
-			if (Math.abs(ball.getCenterY() - paddle.getCenterY()) <= ball.getHeight() / 2 + paddle.getHeight() / 2) {
-				ball.setVelocityY(ball.getVelocityY() * -1);
-
-			}
 		} else if (ball.getCenterY() >= paddle.getCenterY() - paddle.getHeight() / 2
 				&& ball.getCenterY() <= paddle.getCenterY() + paddle.getHeight() / 2) {
 			if (Math.abs(ball.getCenterX() - paddle.getCenterX()) <= ball.getWidth() / 2 + paddle.getWidth() / 2) {
 
 				ball.setVelocityX(ball.getVelocityX() * -1);
+
+			}
+		} else if (ball.getCenterX() >= paddle.getCenterX() - paddle.getWidth() / 2
+				&& ball.getCenterX() <= paddle.getCenterX() + paddle.getWidth() / 2) {
+			if (Math.abs(ball.getCenterY() - paddle.getCenterY()) <= ball.getHeight() / 2 + paddle.getHeight() / 2) {
+				ball.setVelocityY(ball.getVelocityY() * -1);
 
 			}
 		}
