@@ -142,12 +142,39 @@ public class GameController implements Controller {
 	}
 
 	private void checkForColisionBallAndPaddle() {
+		float verAx = paddle.getCenterX() - paddle.getWidth() / 2;
+		float verAy = paddle.getCenterY() + paddle.getHeight() / 2;
+		float verBx = paddle.getCenterX() + paddle.getWidth() / 2;
+		float verBy = paddle.getCenterY() + paddle.getHeight() / 2;
 		float verCx = paddle.getCenterX() + paddle.getWidth() / 2;
 		float verCy = paddle.getCenterY() - paddle.getHeight() / 2;
 		float verDx = paddle.getCenterX() - paddle.getWidth() / 2;
 		float verDy = paddle.getCenterY() - paddle.getHeight() / 2;
 
-		if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) < Math
+		if (Math.pow((ball.getCenterX() - verAx), 2) + Math.pow((ball.getCenterY() - verAy), 2) < Math
+				.pow(ball.getRadius(), 2)) {
+			if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
+				ball.setVelocityX(ball.getVelocityX() * -1);
+				ball.setVelocityY(ball.getVelocityY() * -1);
+
+			} else if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
+				ball.setVelocityX(ball.getVelocityX() * -1);
+			} else {
+				ball.setVelocityY(ball.getVelocityY() * -1);
+			}
+		} else if (Math.pow((ball.getCenterX() - verBx), 2) + Math.pow((ball.getCenterY() - verBy), 2) < Math
+				.pow(ball.getRadius(), 2)) {
+			if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
+
+				ball.setVelocityX(ball.getVelocityX() * -1);
+				ball.setVelocityY(ball.getVelocityY() * -1);
+
+			} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
+				ball.setVelocityX(ball.getVelocityX() * -1);
+			} else {
+				ball.setVelocityY(ball.getVelocityY() * -1);
+			}
+		}else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) < Math
 				.pow(ball.getRadius(), 2)) {
 			if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
 
