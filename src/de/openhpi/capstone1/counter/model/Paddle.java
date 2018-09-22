@@ -14,8 +14,6 @@ public class Paddle extends AbstractGameComponent {
 		} else {
 			this.setxPos(mouseX);
 		}
-		this.setCenterX(this.getxPos() + this.getWidth() / 2);
-		this.setCenterY(this.getyPos() + this.getHeight() / 2);
 	}
 
 }

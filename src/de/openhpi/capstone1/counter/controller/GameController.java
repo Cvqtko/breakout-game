@@ -38,11 +38,11 @@ public class GameController implements Controller {
 	}
 
 	private void checkForCollisionBallAndDisplay() {
-		if (ball.getxPos() <= ball.getRadius() || ball.getxPos() > display.width - ball.getWidth()) {
+		if (ball.getxPos() <= 0 || ball.getxPos() + ball.getWidth() >= display.width) {
 
 			ball.setVelocityX(ball.getVelocityX() * -1); // Change ball movement direction
 		}
-		if (ball.getyPos() <= ball.getRadius()) {
+		if (ball.getyPos() <= 0) {
 			ball.setVelocityY(ball.getVelocityY() * -1); // Change ball movement direction
 		}
 		// if ball goes below the display height and hasn't hit the paddle - stop the

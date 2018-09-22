@@ -7,7 +7,7 @@ public class Ball extends AbstractGameComponent {
 	private int radius;
 
 	public Ball(int xPos, int yPos, int width, int height, boolean isVisible) {
-		super(xPos, yPos, width, height, isVisible);
+		super(xPos - width / 2, yPos - width / 2, width, height, isVisible);
 		this.radius = width / 2;
 
 	}
@@ -39,7 +39,5 @@ public class Ball extends AbstractGameComponent {
 	public void move() {
 		this.setxPos(this.getxPos() + this.velocityX);
 		this.setyPos(this.getyPos() + this.velocityY);
-		this.setCenterX(this.getxPos());
-		this.setCenterY(this.getyPos());
 	}
 }

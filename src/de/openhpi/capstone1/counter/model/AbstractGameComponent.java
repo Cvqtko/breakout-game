@@ -51,19 +51,11 @@ public class AbstractGameComponent {
 	}
 
 	public float getCenterX() {
-		return centerX;
-	}
-
-	public void setCenterX(float centerX) {
-		this.centerX = centerX;
+		return this.xPos + width / 2;
 	}
 
 	public float getCenterY() {
-		return centerY;
-	}
-
-	public void setCenterY(float centerY) {
-		this.centerY = centerY;
+		return this.yPos + height / 2;
 	}
 
 	public void setVisible(boolean isVisible) {
