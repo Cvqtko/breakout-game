@@ -3,7 +3,7 @@ package de.openhpi.capstone1.counter.model;
 public class Paddle extends AbstractGameComponent {
 
 	public Paddle(int xPos, int yPos, int width, int height, boolean isVisible) {
-		super(xPos, yPos, width, height, isVisible);
+		super(xPos, yPos, width, height, isVisible, GameComponentType.PADDLE);
 	}
 
 	public void move(int displayWidth, int mouseX) {

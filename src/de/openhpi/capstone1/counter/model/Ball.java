@@ -7,7 +7,7 @@ public class Ball extends AbstractGameComponent {
 	private int radius;
 
 	public Ball(int xPos, int yPos, int width, int height, boolean isVisible) {
-		super(xPos - width / 2, yPos - width / 2, width, height, isVisible);
+		super(xPos - width / 2, yPos - width / 2, width, height, isVisible, GameComponentType.BALL);
 		this.radius = width / 2;
 
 	}

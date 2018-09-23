@@ -17,7 +17,7 @@ public class BrickView extends AbstractView {
 	public void update() {
 		for (Brick brick : bricks) {
 			if (brick.getVisible()) {
-				display.fill(brick.getColor());
+				display.fill(display.color(brick.getColorR(), brick.getColorG(), brick.getColorB()));
 				display.rect(brick.getxPos(), brick.getyPos(), brick.getWidth(), brick.getHeight());
 			}
 		}
