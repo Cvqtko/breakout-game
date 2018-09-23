@@ -35,7 +35,6 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void keyPressed() {
-		System.out.println(keyCode);
 		interactiveComponent.handleKetPressedEvent(keyCode);
 	}
 }

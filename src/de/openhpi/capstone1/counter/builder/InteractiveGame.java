@@ -1,7 +1,7 @@
 package de.openhpi.capstone1.counter.builder;
 
 import de.openhpi.capstone1.counter.controller.Controller;
-import de.openhpi.capstone1.counter.controller.GameController;
+import de.openhpi.capstone1.counter.controller.GameControllerStrategy;
 import de.openhpi.capstone1.counter.model.Ball;
 import de.openhpi.capstone1.counter.model.Brick;
 import de.openhpi.capstone1.counter.model.BrickFactory;
@@ -15,7 +15,7 @@ import de.openhpi.capstone1.counter.view.PaddleView;
 import processing.core.PApplet;
 
 public class InteractiveGame extends InteractiveComponent {
-	Controller gameController;
+	Controller gameControllerStrategy;
 	Ball ball;
 	Paddle paddle;
 	Brick[] bricks;
@@ -46,11 +46,11 @@ public class InteractiveGame extends InteractiveComponent {
 	}
 
 	public void addController() {
-		gameController = new GameController(ball, paddle, bricks, counter, display);
+		gameControllerStrategy = new GameControllerStrategy(ball, paddle, bricks, counter, display);
 	}
 
 	public void checkForCollisions() {
-		gameController.checkForCollisions();
+		gameControllerStrategy.checkForCollisions();
 	}
 
 	@Override
@@ -65,12 +65,12 @@ public class InteractiveGame extends InteractiveComponent {
 
 	@Override
 	public void handleMouseDragEvent(int mouseX) {
-		gameController.handleMouseDragEvent(mouseX);
+		gameControllerStrategy.handleMouseDragEvent(mouseX);
 	}
 
 	@Override
 	public void handleKetPressedEvent(int keyCode) {
-		gameController.handleKetPressedEvent(keyCode);
+		gameControllerStrategy.handleKetPressedEvent(keyCode);
 
 	}
 
