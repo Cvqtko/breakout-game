@@ -11,12 +11,12 @@ public class TheApp extends PApplet {
 	@Override
 	public void settings() {
 		size(600, 400);
-		// size(1000, 600);
+//		 size(1000, 600);
 	}
 
 	@Override
 	public void setup() { // setup() runs once
-		frameRate(150);
+		frameRate(650);
 		InteractiveGameBuilder builder = new InteractiveGameBuilder();
 		GUIComponent.construct(this, builder);
 		interactiveComponent = builder.getComponent();
