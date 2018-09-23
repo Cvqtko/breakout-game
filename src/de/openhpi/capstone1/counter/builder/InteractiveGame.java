@@ -28,7 +28,8 @@ public class InteractiveGame extends InteractiveComponent {
 
 	public void addModel(PApplet display) {
 		paddle = new Paddle(0, display.height - 20, 100, 10, true);
-		ball = new Ball(300, 300, 20, 20, true);
+		ball = new Ball((int) (paddle.getCenterX()), (int) (paddle.getyPos() - paddle.getHeight()), 20, 20, true);
+
 		brickFactory = new BrickFactory();
 		bricks = brickFactory.getBricks();
 		counter = new Counter(10, 30, 100, 30, true);

@@ -14,6 +14,7 @@ public class GameController implements Controller {
 	PApplet display;
 	Counter counter;
 	long collisionWithPaddleDetected;
+	boolean isSpaceClicked;
 
 	public GameController(Ball ball, Paddle paddle, Brick[] bricks, Counter counter, PApplet display) {
 		this.ball = ball;
@@ -22,10 +23,43 @@ public class GameController implements Controller {
 		this.display = display;
 		this.counter = counter;
 		collisionWithPaddleDetected = 0;
+		isSpaceClicked = false;
 	}
 
 	public void handleMouseDragEvent(int mouseX) {
-		paddle.move(display.width, mouseX);
+		if (!isSpaceClicked) {
+			paddle.move(display.width, mouseX);
+			ball.setxPos((int) paddle.getCenterX() - ball.getWidth() / 2);
+			ball.setyPos(paddle.getyPos() - ball.getHeight());
+		} else {
+			paddle.move(display.width, mouseX);
+		}
+	}
+
+	@Override
+	public void handleKetPressedEvent(int keyCode) {
+		if (!isSpaceClicked) {
+			if (keyCode == 32) {
+				isSpaceClicked = true;
+				ball.setVelocityX(-1);
+				ball.setVelocityY(-1);
+			} else if (keyCode == 37) {
+				paddle.moveLeft();
+				ball.setxPos((int) paddle.getCenterX() - ball.getWidth() / 2);
+				ball.setyPos(paddle.getyPos() - ball.getHeight());
+			} else if (keyCode == 39) {
+				paddle.moveRight(display.width);
+				ball.setxPos((int) paddle.getCenterX() - ball.getWidth() / 2);
+				ball.setyPos(paddle.getyPos() - ball.getHeight());
+			}
+		} else {
+			if (keyCode == 37) {
+				paddle.moveLeft();
+			} else if (keyCode == 39) {
+				paddle.moveRight(display.width);
+
+			}
+		}
 	}
 
 	@Override
@@ -226,13 +260,4 @@ public class GameController implements Controller {
 		}
 	}
 
-	@Override
-	public void handleKetPressedEvent(int keyCode) {
-		if (keyCode == 37) {
-			paddle.moveLeft();
-		} else if (keyCode == 39) {
-			paddle.moveRight(display.width);
-		}
-
-	}
 }

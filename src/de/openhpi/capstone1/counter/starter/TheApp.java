@@ -11,7 +11,7 @@ public class TheApp extends PApplet {
 	@Override
 	public void settings() {
 		size(600, 400);
-//		 size(1000, 600);
+		// size(1000, 600);
 	}
 
 	@Override
@@ -35,8 +35,7 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void keyPressed() {
-
+		System.out.println(keyCode);
 		interactiveComponent.handleKetPressedEvent(keyCode);
-
 	}
 }
