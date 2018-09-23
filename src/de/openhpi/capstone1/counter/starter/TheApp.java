@@ -10,13 +10,13 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void settings() {
-//		size(1024, 600);
 		size(600, 400);
+		// size(1000, 600);
 	}
 
 	@Override
 	public void setup() { // setup() runs once
-		frameRate(30);
+		frameRate(150);
 		InteractiveGameBuilder builder = new InteractiveGameBuilder();
 		GUIComponent.construct(this, builder);
 		interactiveComponent = builder.getComponent();
@@ -33,4 +33,10 @@ public class TheApp extends PApplet {
 		interactiveComponent.handleMouseDragEvent(mouseX);
 	}
 
+	@Override
+	public void keyPressed() {
+
+		interactiveComponent.handleKetPressedEvent(keyCode);
+
+	}
 }

@@ -48,11 +48,6 @@ public class InteractiveGame extends InteractiveComponent {
 		gameController = new GameController(ball, paddle, bricks, counter, display);
 	}
 
-	@Override
-	public void handleMouseDragEvent(int mouseX) {
-		gameController.handleMouseDragEvent(mouseX);
-	}
-
 	public void checkForCollisions() {
 		gameController.checkForCollisions();
 	}
@@ -65,6 +60,17 @@ public class InteractiveGame extends InteractiveComponent {
 			view.update();
 		}
 		checkForCollisions();
+	}
+
+	@Override
+	public void handleMouseDragEvent(int mouseX) {
+		gameController.handleMouseDragEvent(mouseX);
+	}
+
+	@Override
+	public void handleKetPressedEvent(int keyCode) {
+		gameController.handleKetPressedEvent(keyCode);
+
 	}
 
 }

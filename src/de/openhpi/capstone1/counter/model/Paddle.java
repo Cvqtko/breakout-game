@@ -16,4 +16,19 @@ public class Paddle extends AbstractGameComponent {
 		}
 	}
 
+	public void moveLeft() {
+		if (this.getxPos() - this.getWidth() / 2 < 0) {
+			this.setxPos(0);
+		} else {
+			this.setxPos(this.getxPos() - this.getWidth() / 2);
+		}
+	}
+
+	public void moveRight(int displayWidth) {
+		if (this.getxPos() + this.getWidth() + this.getWidth() / 2 > displayWidth) {
+			this.setxPos(displayWidth - this.getWidth());
+		} else {
+			this.setxPos(this.getxPos() + this.getWidth() / 2);
+		}
+	}
 }
