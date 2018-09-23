@@ -14,7 +14,7 @@ public class BallView extends AbstractView {
 
 	@Override
 	public void update() {
-		display.fill(244, 79, 65);
+		display.fill(display.color(ball.getColorR(), ball.getColorG(), ball.getColorB()));
 		display.ellipse(ball.getCenterX(), ball.getCenterY(), ball.getWidth(), ball.getHeight());
 	}
 

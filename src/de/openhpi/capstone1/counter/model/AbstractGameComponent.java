@@ -6,8 +6,6 @@ public abstract class AbstractGameComponent {
 	private int width;
 	private int height;
 	private GameComponentType gameComponentType;
-	private float centerX;
-	private float centerY;
 	private boolean isVisible;
 	protected int colorR;
 	protected int colorG;

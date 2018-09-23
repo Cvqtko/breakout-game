@@ -3,21 +3,28 @@ package de.openhpi.capstone1.counter.starter;
 import de.openhpi.capstone1.counter.builder.GUIComponent;
 import de.openhpi.capstone1.counter.builder.InteractiveComponent;
 import de.openhpi.capstone1.counter.builder.InteractiveGameBuilder;
+import de.openhpi.capstone1.counter.model.Model;
+import de.openhpi.capstone1.counter.view.View;
 import processing.core.PApplet;
 
 public class TheApp extends PApplet {
 	InteractiveComponent interactiveComponent;
-
+    Model theModel;
+    View theView;
+    
 	@Override
 	public void settings() {
-		size(600, 400);
+		theModel = new Model();
+		theView = new View(this);
+		size(theModel.getPlaygroundWidth(), theModel.getPlayGroundHeight());
+		
 		// size(1000, 600);
 	}
 
 	@Override
 	public void setup() { // setup() runs once
-		frameRate(100);
-		InteractiveGameBuilder builder = new InteractiveGameBuilder();
+		frameRate(theModel.getFrameRate());
+		InteractiveGameBuilder builder = new InteractiveGameBuilder(theModel, theView);
 		GUIComponent.construct(this, builder);
 		interactiveComponent = builder.getComponent();
 	}

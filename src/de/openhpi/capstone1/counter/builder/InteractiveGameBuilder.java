@@ -1,14 +1,22 @@
 package de.openhpi.capstone1.counter.builder;
 
+import de.openhpi.capstone1.counter.model.Model;
+import de.openhpi.capstone1.counter.view.View;
 import processing.core.PApplet;
 
 public class InteractiveGameBuilder implements Builder {
 
 	InteractiveGame iGame;
+	Model model;
+	View view;
 	
+	public InteractiveGameBuilder(Model model, View view) {
+		this.model = model;
+		this.view = view;
+	}
 	@Override
 	public void buildComponent() {
-		iGame = new InteractiveGame();
+		iGame = new InteractiveGame(model, view);
 	}
 
 	@Override

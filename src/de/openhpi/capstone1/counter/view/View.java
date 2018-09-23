@@ -16,14 +16,14 @@ public class View extends AbstractView {
 		// TODO Auto-generated method stub
 	}
 	public void UpdateComponents(List<AbstractGameComponent> components) {
-		
+		display.background(204);
 		components.forEach(gameComponent->renderComponent(gameComponent));
-		;
-		
 	}
 	
 	private void renderComponent(AbstractGameComponent gameComponent) {
-		display.background(204);
+		
+		
+		
 		switch (gameComponent.getGameComponentType()) {
 		case BALL:
 			display.fill(244, 79, 65);

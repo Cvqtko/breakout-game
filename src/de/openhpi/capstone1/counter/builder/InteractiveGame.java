@@ -1,52 +1,80 @@
 package de.openhpi.capstone1.counter.builder;
 
+import java.util.List;
+
 import de.openhpi.capstone1.counter.controller.Controller;
 import de.openhpi.capstone1.counter.controller.GameControllerStrategy;
-import de.openhpi.capstone1.counter.model.Ball;
-import de.openhpi.capstone1.counter.model.Brick;
-import de.openhpi.capstone1.counter.model.BrickFactory;
-import de.openhpi.capstone1.counter.model.Counter;
-import de.openhpi.capstone1.counter.model.Paddle;
+import de.openhpi.capstone1.counter.model.*;
 import de.openhpi.capstone1.counter.view.AbstractView;
 import de.openhpi.capstone1.counter.view.BallView;
 import de.openhpi.capstone1.counter.view.BrickView;
 import de.openhpi.capstone1.counter.view.CounterView;
 import de.openhpi.capstone1.counter.view.PaddleView;
+import de.openhpi.capstone1.counter.view.View;
 import processing.core.PApplet;
 
 public class InteractiveGame extends InteractiveComponent {
 	Controller gameControllerStrategy;
-	Ball ball;
-	Paddle paddle;
+	//Ball ball;
+	//Paddle paddle;
 	Brick[] bricks;
 	PApplet display;
 	BrickFactory brickFactory;
 	Counter counter;
-
-	public InteractiveGame() {
+	
+	Model model;
+    View view;
+	public InteractiveGame(Model model, View view) {
+		this.model = model;
+		this.view = view;
 	}
 
 	public void addModel(PApplet display) {
-		paddle = new Paddle(0, display.height - 20, 100, 10, true);
+		/*
+		 paddle = new Paddle(0, display.height - 20, 100, 10, true);
 		ball = new Ball((int) (paddle.getCenterX()), (int) (paddle.getyPos() - paddle.getHeight()), 20, 20, true);
 
 		brickFactory = new BrickFactory();
 		bricks = brickFactory.getBricks();
 		counter = new Counter(10, 30, 100, 30, true);
 		this.display = display;
+		*/
+		
+		//Creating the components and adding them as AbstractComponent to the model
+		//the paddle
+		//paddle = new Paddle(0, model.getPlayGroundHeight() - 20, 100, 10, true);
+		model.addGameComponent(new Paddle(0, model.getPlayGroundHeight() - 20, 100, 10, true));
+		//the ball
+		//ball = new Ball((int) (paddle.getCenterX()), (int) (paddle.getyPos() - paddle.getHeight()), 20, 20, true);
+		model.addGameComponent(new Ball((int) (model.getPaddle().getCenterX()), (int) (model.getPaddle().getyPos() - model.getPaddle().getHeight()), 20, 20, true));
+		
+		
+	 
+		// the brick rows
+		brickFactory = new BrickFactory();
+		bricks = brickFactory.getBricks();
+		for(AbstractGameComponent brick : bricks)
+			model.addGameComponent(brick);
+		
+		// the counter
+		counter = new Counter(10, 30, 100, 30, true);
+	    model.addGameComponent(counter);		
+		this.display = display;
 
 	}
 
 	public void createViews(PApplet display) {
+		/*
 		views = new AbstractView[4];
-		views[0] = new PaddleView(display, paddle);
-		views[1] = new BallView(display, ball);
+		views[0] = new PaddleView(display, model.getPaddle());
+		views[1] = new BallView(display, model.getBall());
 		views[2] = new BrickView(display, bricks);
 		views[3] = new CounterView(display, counter);
+		*/
 	}
 
 	public void addController() {
-		gameControllerStrategy = new GameControllerStrategy(ball, paddle, bricks, counter, display);
+		gameControllerStrategy = new GameControllerStrategy(model.getBall(), model.getPaddle(), bricks, counter, display);
 	}
 
 	public void checkForCollisions() {
@@ -55,11 +83,12 @@ public class InteractiveGame extends InteractiveComponent {
 
 	@Override
 	public void update() {
-		this.ball.move();
-
-		for (AbstractView view : views) {
+		this.model.getBall().move();
+        
+		this.view.UpdateComponents(model.getGameComponents());
+/*		for (AbstractView view : views) {
 			view.update();
-		}
+		}*/
 		checkForCollisions();
 	}
 
