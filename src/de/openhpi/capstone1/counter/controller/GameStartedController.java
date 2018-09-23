@@ -1,5 +1,6 @@
 package de.openhpi.capstone1.counter.controller;
 
+import de.openhpi.capstone1.counter.model.AbstractGameComponent;
 import de.openhpi.capstone1.counter.model.Ball;
 import de.openhpi.capstone1.counter.model.Brick;
 import de.openhpi.capstone1.counter.model.Counter;
@@ -40,14 +41,23 @@ public class GameStartedController implements Controller {
 
 	@Override
 	public void checkForCollisions() {
-
+		long currentTimeMillis = System.currentTimeMillis();
 		checkForCollisionBallAndDisplay();
 
 		for (Brick brick : bricks) {
-			checkForCollisionBallAndBrick(brick);
+			if (brick.getVisible()) {
+				if (circleRectCollision(ball, brick)) {
+					counter.updateCount(brick.getPoints());
+					brick.hasBeenHit();
+				}
+			}
 		}
 
-		checkForColisionBallAndPaddle();
+		if (currentTimeMillis - collisionWithPaddleDetected > 100) {
+			if (circleRectCollision(ball, paddle)) {
+				this.collisionWithPaddleDetected = System.currentTimeMillis();
+			}
+		}
 	}
 
 	private void checkForCollisionBallAndDisplay() {
@@ -64,176 +74,46 @@ public class GameStartedController implements Controller {
 		}
 	}
 
-	private void checkForCollisionBallAndBrick(Brick brick) {
-		if (brick.getVisible()) {
-			float verAx = brick.getCenterX() - brick.getWidth() / 2;
-			float verAy = brick.getCenterY() + brick.getHeight() / 2;
-			float verBx = brick.getCenterX() + brick.getWidth() / 2;
-			float verBy = brick.getCenterY() + brick.getHeight() / 2;
-			float verCx = brick.getCenterX() + brick.getWidth() / 2;
-			float verCy = brick.getCenterY() - brick.getHeight() / 2;
-			float verDx = brick.getCenterX() - brick.getWidth() / 2;
-			float verDy = brick.getCenterY() - brick.getHeight() / 2;
+	// Checks for collision between a Circle and a Rectangle
+	boolean circleRectCollision(Ball ball, AbstractGameComponent rect) {
 
-			if (Math.pow((ball.getCenterX() - verAx), 2) + Math.pow((ball.getCenterY() - verAy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
+		float cx = ball.getCenterX();
+		float cy = ball.getCenterY();
+		float radius = ball.getRadius();
+		float rx = rect.getxPos();
+		float ry = rect.getyPos();
+		float rw = rect.getWidth();
+		float rh = rect.getHeight();
 
-				} else if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-				} else {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-				}
-				counter.updateCount(brick.getPoints());
-				brick.hasBeenHit();
-			} else if (Math.pow((ball.getCenterX() - verBx), 2) + Math.pow((ball.getCenterY() - verBy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
+		// temporary variables to set edges for testing
+		float testX = cx;
+		float testY = cy;
 
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
+		// which edge is closest?
+		if (cx < rx)
+			testX = rx; // compare left edge
+		else if (cx > rx + rw)
+			testX = rx + rw; // right edge
+		if (cy < ry)
+			testY = ry; // top edge
+		else if (cy > ry + rh)
+			testY = ry + rh; // bottom edge
 
-				} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-				} else {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-				}
-				counter.updateCount(brick.getPoints());
-				brick.hasBeenHit();
-			} else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
+		// get distance from closest edges
+		float distX = cx - testX;
+		float distY = cy - testY;
+		float distance = (float) Math.sqrt((distX * distX) + (distY * distY));
 
-				} else if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-				} else {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-				}
-				counter.updateCount(brick.getPoints());
-				brick.hasBeenHit();
-			} else if (Math.pow((ball.getCenterX() - verDx), 2) + Math.pow((ball.getCenterY() - verDy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-
-				if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
-
-				} else if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-				} else {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-
-				}
-				counter.updateCount(brick.getPoints());
-				brick.hasBeenHit();
-			} else if (ball.getCenterX() >= brick.getCenterX() - brick.getWidth() / 2
-					&& ball.getCenterX() <= brick.getCenterX() + brick.getWidth() / 2) {
-				if (Math.abs(ball.getCenterY() - brick.getCenterY()) <= ball.getHeight() / 2 + brick.getHeight() / 2) {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					counter.updateCount(brick.getPoints());
-					brick.hasBeenHit();
-					System.out.println();
-				}
-			} else if (ball.getCenterY() >= brick.getCenterY() - brick.getHeight() / 2
-					&& ball.getCenterY() <= brick.getCenterY() + brick.getHeight() / 2) {
-				if (Math.abs(ball.getCenterX() - brick.getCenterX()) <= ball.getWidth() / 2 + brick.getWidth() / 2) {
-
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					counter.updateCount(brick.getPoints());
-					brick.hasBeenHit();
-
-				}
-
+		// if the distance is less than the radius, we have a collision!
+		if (distance <= radius) {
+			if ((testX == rx && testY == ry) || (testX == rx + rw && testY == ry) || (testX == rx && testY == ry + rh)
+					|| (testX == rx + rw && testY == ry + rh)) {
+				ball.setVelocityX(ball.getVelocityX() * -1);
 			}
+			ball.setVelocityY(ball.getVelocityY() * -1);
+			return true;
 		}
-	}
-
-	private void checkForColisionBallAndPaddle() {
-		long currentTimeMillis = System.currentTimeMillis();
-		if (currentTimeMillis - collisionWithPaddleDetected > 100) {
-			float verAx = paddle.getCenterX() - paddle.getWidth() / 2;
-			float verAy = paddle.getCenterY() + paddle.getHeight() / 2;
-			float verBx = paddle.getCenterX() + paddle.getWidth() / 2;
-			float verBy = paddle.getCenterY() + paddle.getHeight() / 2;
-			float verCx = paddle.getCenterX() + paddle.getWidth() / 2;
-			float verCy = paddle.getCenterY() - paddle.getHeight() / 2;
-			float verDx = paddle.getCenterX() - paddle.getWidth() / 2;
-			float verDy = paddle.getCenterY() - paddle.getHeight() / 2;
-
-			if (ball.getyPos() + ball.getHeight() > paddle.getyPos() + paddle.getHeight() / 2) {
-
-			} else if (Math.pow((ball.getCenterX() - verAx), 2) + Math.pow((ball.getCenterY() - verAy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				} else if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
-					collisionWithPaddleDetected = System.currentTimeMillis();
-					ball.setVelocityX(ball.getVelocityX() * -1);
-				} else {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				}
-
-			} else if (Math.pow((ball.getCenterX() - verBx), 2) + Math.pow((ball.getCenterY() - verBy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
-
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				} else {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				}
-
-			} else if (Math.pow((ball.getCenterX() - verCx), 2) + Math.pow((ball.getCenterY() - verCy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
-
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				} else if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				}
-			} else if (Math.pow((ball.getCenterX() - verDx), 2) + Math.pow((ball.getCenterY() - verDy), 2) <= Math
-					.pow(ball.getRadius(), 2)) {
-				if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
-
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				}
-				collisionWithPaddleDetected = System.currentTimeMillis();
-			} else if (ball.getCenterY() >= paddle.getyPos() - paddle.getHeight() / 2
-					&& ball.getCenterY() <= paddle.getyPos() + paddle.getHeight() / 2) {
-				if (Math.abs(ball.getCenterX() - paddle.getCenterX()) <= ball.getWidth() / 2 + paddle.getWidth() / 2) {
-					ball.setVelocityX(ball.getVelocityX() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				}
-			} else if (ball.getCenterX() >= paddle.getCenterX() - paddle.getWidth() / 2
-					&& ball.getCenterX() <= paddle.getCenterX() + paddle.getWidth() / 2) {
-				if (Math.abs(ball.getCenterY() - paddle.getCenterY()) <= ball.getHeight() / 2
-						+ paddle.getHeight() / 2) {
-					ball.setVelocityY(ball.getVelocityY() * -1);
-					collisionWithPaddleDetected = System.currentTimeMillis();
-				}
-			}
-
-		}
+		return false;
 	}
 
 }

@@ -50,6 +50,5 @@ public class GameNotStartedController implements Controller {
 
 	@Override
 	public void checkForCollisions() {
-
 	}
 }
