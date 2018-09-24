@@ -2,7 +2,7 @@ package de.openhpi.capstone1.counter.controller;
 
 import de.openhpi.capstone1.counter.model.*;
 import de.openhpi.capstone1.counter.view.View;
-import processing.core.PApplet;
+
 
 public class GameControllerStrategy implements Controller {
 	private Controller gameStartedController;
@@ -10,7 +10,7 @@ public class GameControllerStrategy implements Controller {
 	private boolean isSpaceClicked = false;
 	
 
-	public GameControllerStrategy(Model model, View view, PApplet display) {
+	public GameControllerStrategy(Model model, View view) {
 		this.gameStartedController = new GameStartedController(model, view /*, display*/);
 		this.gameNotStartedController = new GameNotStartedController(model, view);
 	}

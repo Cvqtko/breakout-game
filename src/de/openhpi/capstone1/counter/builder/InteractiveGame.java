@@ -65,17 +65,11 @@ public class InteractiveGame extends InteractiveComponent {
 	}
 
 	public void createViews(PApplet display) {
-		/*
-		views = new AbstractView[4];
-		views[0] = new PaddleView(display, model.getPaddle());
-		views[1] = new BallView(display, model.getBall());
-		views[2] = new BrickView(display, bricks);
-		views[3] = new CounterView(display, counter);
-		*/
+
 	}
 
 	public void addController() {
-		gameControllerStrategy = new GameControllerStrategy(model, view, display);
+		gameControllerStrategy = new GameControllerStrategy(model, view);
 	}
 	
 	public void checkForCollisions() {
