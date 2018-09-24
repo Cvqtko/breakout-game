@@ -2,7 +2,10 @@ package de.openhpi.game.view;
 
 import java.util.List;
 
-import de.openhpi.game.model.*;
+import de.openhpi.game.model.AbstractGameComponent;
+import de.openhpi.game.model.LevelCounter;
+import de.openhpi.game.model.Score;
+import de.openhpi.game.model.WelcomeScreen;
 import processing.core.PApplet;
 
 public class View extends AbstractView {
@@ -36,10 +39,10 @@ public class View extends AbstractView {
 			display.rect(gameComponent.getxPos(), gameComponent.getyPos(), gameComponent.getWidth(),
 					gameComponent.getHeight());
 			break;
-		case COUNTER:
+		case SCORE:
 			display.fill(0);
 			display.textSize(16);
-			display.text(((Score) gameComponent).getCount(), gameComponent.getxPos(), gameComponent.getyPos());
+			display.text(((Score) gameComponent).getScore(), gameComponent.getxPos(), gameComponent.getyPos());
 			break;
 		case LEVEL_COUNTER:
 			display.fill(0);

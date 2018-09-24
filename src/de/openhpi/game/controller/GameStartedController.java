@@ -4,6 +4,7 @@ import de.openhpi.game.model.AbstractGameComponent;
 import de.openhpi.game.model.Ball;
 import de.openhpi.game.model.Brick;
 import de.openhpi.game.model.Model;
+import de.openhpi.game.model.Score;
 import de.openhpi.game.model.WelcomeScreen;
 import de.openhpi.game.view.View;
 
@@ -53,7 +54,7 @@ public class GameStartedController implements Controller {
 		for (Brick brick : model.getBricks()) {
 			if (brick.getVisible()) {
 				if (ballRectCollision(brick)) {
-					model.getCounter().updateCount(brick.getPoints());
+					model.getScore().updateScore(brick.getPoints());
 					brick.hasBeenHit();
 				}
 			}
@@ -78,8 +79,9 @@ public class GameStartedController implements Controller {
 		}
 		// if ball goes below the display height stop the game
 		if (ball.getyPos() > model.getPlayGroundHeight()) {
+			Score score = model.getScore();
 			WelcomeScreen welcomeScreen = model.getWelcomeScreen();
-			welcomeScreen.setText("Game ended");
+			welcomeScreen.setText("Game ended\nScore: " + score.getScore());
 			// view.stopLooping();
 		}
 	}

@@ -58,9 +58,9 @@ public class Model {
 		return returnList.toArray(returnArray);
 	}
 
-	public Score getCounter() {
+	public Score getScore() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
-				.filter(comp -> comp.getGameComponentType() == GameComponentType.COUNTER).findFirst();
+				.filter(comp -> comp.getGameComponentType() == GameComponentType.SCORE).findFirst();
 		if (agc.isPresent())
 			if (agc.get() instanceof Score) // just to be on the very safe side
 				return (Score) agc.get();

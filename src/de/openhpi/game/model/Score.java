@@ -2,18 +2,18 @@ package de.openhpi.game.model;
 
 public class Score extends AbstractGameComponent {
 
-	private int count = 0;
+	private int score = 0;
 
 	public Score(int xPos, int yPos, int width, int height, boolean isVisible) {
-		super(xPos, yPos, width, height, isVisible, GameComponentType.COUNTER);
+		super(xPos, yPos, width, height, isVisible, GameComponentType.SCORE);
 		// TODO Auto-generated constructor stub
 	}
 
-	public void updateCount(int value) {
-		this.count += value;
+	public void updateScore(int value) {
+		this.score += value;
 	}
 
-	public int getCount() {
-		return this.count;
+	public int getScore() {
+		return this.score;
 	}
 }
