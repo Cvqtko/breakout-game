@@ -11,44 +11,43 @@ public class View extends AbstractView {
 		super(display);
 	}
 
-	@Override
-	public void update() {
-		// TODO Auto-generated method stub
-	}
 	public void UpdateComponents(List<AbstractGameComponent> components) {
 		display.background(204);
-		components.forEach(gameComponent->renderComponent(gameComponent));
+		components.forEach(gameComponent -> renderComponent(gameComponent));
 	}
-	
-	private void renderComponent(AbstractGameComponent gameComponent) {
-				
+
+	public void renderComponent(AbstractGameComponent gameComponent) {
+
 		switch (gameComponent.getGameComponentType()) {
 		case BALL:
-			display.fill(244, 79, 65);
-			display.ellipse(gameComponent.getxPos(), gameComponent.getyPos(), gameComponent.getWidth(), gameComponent.getHeight());
+			display.fill(gameComponent.getColorR(), gameComponent.getColorG(), gameComponent.getColorB());
+			display.ellipse(gameComponent.getCenterX(), gameComponent.getCenterY(), gameComponent.getWidth(),
+					gameComponent.getHeight());
 			break;
 		case BRICK:
 			if (gameComponent.getVisible()) {
-				//display.fill(brick.getColor());
-				display.fill(display.color(gameComponent.getColorR(), gameComponent.getColorG(), gameComponent.getColorB()));
-				display.rect(gameComponent.getxPos(), gameComponent.getyPos(), gameComponent.getWidth(), gameComponent.getHeight());
+				display.fill(gameComponent.getColorR(), gameComponent.getColorG(), gameComponent.getColorB());
+				display.rect(gameComponent.getxPos(), gameComponent.getyPos(), gameComponent.getWidth(),
+						gameComponent.getHeight());
 			}
 			break;
 		case PADDLE:
 			display.fill(0);
-			display.rect(gameComponent.getxPos(), gameComponent.getyPos(), gameComponent.getWidth(), gameComponent.getHeight());
-	        break;
+			display.rect(gameComponent.getxPos(), gameComponent.getyPos(), gameComponent.getWidth(),
+					gameComponent.getHeight());
+			break;
 		case COUNTER:
 			display.fill(0);
 			display.textSize(32);
-			display.text("Still a Dummy!" + "", gameComponent.getxPos(), gameComponent.getyPos());
+			display.text(((Counter) gameComponent).getCount(), gameComponent.getxPos(), gameComponent.getyPos());
 			break;
-		default: // if another component type should occur, just do nothing as currently not supported
+		default: // if another component type should occur, just do nothing as currently not
+					// supported
 			break;
 		}
 
 	}
-	
+
 	public void stopLooping() {
 		display.noLoop();
 	}

@@ -11,16 +11,16 @@ import processing.core.PApplet;
 
 public class GameStartedController implements Controller {
 
-	//Paddle paddle;
-	//Ball ball;
-	//Brick[] bricks;
-	//PApplet display;
-	//Counter counter;
+	// Paddle paddle;
+	// Ball ball;
+	// Brick[] bricks;
+	// PApplet display;
+	// Counter counter;
 	long collisionWithPaddleDetected;
 	Model model;
 	View view;
 
-	public GameStartedController(Model model, View view /*, PApplet display */) {
+	public GameStartedController(Model model, View view /* , PApplet display */) {
 
 		this.model = model;
 		this.view = view;
@@ -74,14 +74,14 @@ public class GameStartedController implements Controller {
 		}
 		// if ball goes below the display height stop the game
 		if (ball.getyPos() > model.getPlayGroundHeight()) {
-			//display.noLoop();
 			view.stopLooping();
 		}
 	}
 
 	// Checks for collision between a Circle and a Rectangle
-	// used for checking ball collisions only, as a ball is always part of a collision
-	boolean ballRectCollision(/*Ball ball,*/ AbstractGameComponent rect) {
+	// used for checking ball collisions only, as a ball is always part of a
+	// collision
+	boolean ballRectCollision(/* Ball ball, */ AbstractGameComponent rect) {
 		// using a local variable ball, to keep the statements shorter
 		Ball ball = model.getBall();
 		float cx = ball.getCenterX();
@@ -113,11 +113,56 @@ public class GameStartedController implements Controller {
 
 		// if the distance is less than the radius, we have a collision!
 		if (distance <= radius) {
-			if ((testX == rx && testY == ry) || (testX == rx + rw && testY == ry) || (testX == rx && testY == ry + rh)
-					|| (testX == rx + rw && testY == ry + rh)) {
+			// collision with top left edge
+			if (testX == rx && testY == ry) {
+				if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				} else if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+				} else {
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				}
+			}
+			// collision with top right edge
+			else if (testX == rx + rw && testY == ry) {
+				if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				} else if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+				} else {
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				}
+			} // collision bottom left edge
+			else if (testX == rx && testY == ry + rh) {
+				if (ball.getVelocityX() > 0 && ball.getVelocityY() < 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				} else if (ball.getVelocityX() > 0 && ball.getVelocityY() > 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+				} else {
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				}
+			} // collision bottom right edge
+			else if (testX == rx + rw && testY == ry + rh) {
+				if (ball.getVelocityX() < 0 && ball.getVelocityY() < 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				} else if (ball.getVelocityX() < 0 && ball.getVelocityY() > 0) {
+					ball.setVelocityX(ball.getVelocityX() * -1);
+				} else {
+					ball.setVelocityY(ball.getVelocityY() * -1);
+				}
+			} // collision with tob/bottom side
+			else if (testX == cx) {
+				ball.setVelocityY(ball.getVelocityY() * -1);
+
+			} // collision with the left/right side
+			else {
 				ball.setVelocityX(ball.getVelocityX() * -1);
 			}
-			ball.setVelocityY(ball.getVelocityY() * -1);
+
 			return true;
 		}
 		return false;

@@ -9,15 +9,15 @@ import processing.core.PApplet;
 
 public class TheApp extends PApplet {
 	InteractiveComponent interactiveComponent;
-    Model theModel;
-    View theView;
-    
+	Model theModel;
+	View theView;
+
 	@Override
 	public void settings() {
 		theModel = new Model();
 		theView = new View(this);
 		size(theModel.getPlayGroundWidth(), theModel.getPlayGroundHeight());
-		
+
 		// size(1000, 600);
 	}
 
