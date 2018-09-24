@@ -1,8 +1,8 @@
-package de.openhpi.capstone1.counter.view;
+package de.openhpi.game.view;
 
 import java.util.List;
 
-import de.openhpi.capstone1.counter.model.*;
+import de.openhpi.game.model.*;
 import processing.core.PApplet;
 
 public class View extends AbstractView {
@@ -38,8 +38,20 @@ public class View extends AbstractView {
 			break;
 		case COUNTER:
 			display.fill(0);
-			display.textSize(32);
-			display.text(((Counter) gameComponent).getCount(), gameComponent.getxPos(), gameComponent.getyPos());
+			display.textSize(16);
+			display.text(((Score) gameComponent).getCount(), gameComponent.getxPos(), gameComponent.getyPos());
+			break;
+		case LEVEL_COUNTER:
+			display.fill(0);
+			display.textSize(16);
+			display.text("Level " + ((LevelCounter) gameComponent).getLevel(), gameComponent.getxPos(),
+					gameComponent.getyPos());
+			break;
+		case WELCOME_SCREEN:
+			display.fill(0, 102, 153);
+			display.textSize(20);
+
+			display.text(((WelcomeScreen) gameComponent).getText(), gameComponent.getxPos(), gameComponent.getyPos());
 			break;
 		default: // if another component type should occur, just do nothing as currently not
 					// supported

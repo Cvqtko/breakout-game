@@ -1,6 +1,6 @@
-package de.openhpi.capstone1.counter.builder;
+package de.openhpi.game.builder;
 
-import de.openhpi.capstone1.counter.view.AbstractView;
+import de.openhpi.game.view.AbstractView;
 
 public abstract class InteractiveComponent {
 	protected AbstractView[] views;

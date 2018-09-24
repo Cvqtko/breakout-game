@@ -1,17 +1,15 @@
-package de.openhpi.capstone1.counter.controller;
+package de.openhpi.game.controller;
 
-import de.openhpi.capstone1.counter.model.*;
-import de.openhpi.capstone1.counter.view.View;
-
+import de.openhpi.game.model.*;
+import de.openhpi.game.view.View;
 
 public class GameControllerStrategy implements Controller {
 	private Controller gameStartedController;
 	private Controller gameNotStartedController;
 	private boolean isSpaceClicked = false;
-	
 
 	public GameControllerStrategy(Model model, View view) {
-		this.gameStartedController = new GameStartedController(model, view /*, display*/);
+		this.gameStartedController = new GameStartedController(model, view /* , display */);
 		this.gameNotStartedController = new GameNotStartedController(model, view);
 	}
 
@@ -39,6 +37,14 @@ public class GameControllerStrategy implements Controller {
 	@Override
 	public void checkForCollisions() {
 		gameStartedController.checkForCollisions();
-
 	}
+
+	@Override
+	public boolean checkHasLevelEnded() {
+		if (gameStartedController.checkHasLevelEnded()) {
+			isSpaceClicked = false;
+		}
+		return gameStartedController.checkHasLevelEnded();
+	}
+
 }

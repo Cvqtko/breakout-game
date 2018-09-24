@@ -1,4 +1,4 @@
-package de.openhpi.capstone1.counter.builder;
+package de.openhpi.game.builder;
 
 import processing.core.PApplet;
 

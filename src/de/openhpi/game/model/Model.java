@@ -1,4 +1,4 @@
-package de.openhpi.capstone1.counter.model;
+package de.openhpi.game.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -58,12 +58,36 @@ public class Model {
 		return returnList.toArray(returnArray);
 	}
 
-	public Counter getCounter() {
+	public Score getCounter() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
 				.filter(comp -> comp.getGameComponentType() == GameComponentType.COUNTER).findFirst();
 		if (agc.isPresent())
-			if (agc.get() instanceof Counter) // just to be on the very safe side
-				return (Counter) agc.get();
+			if (agc.get() instanceof Score) // just to be on the very safe side
+				return (Score) agc.get();
+			else
+				return null;
+		else
+			return null;
+	}
+
+	public WelcomeScreen getWelcomeScreen() {
+		Optional<AbstractGameComponent> agc = allComponents.stream()
+				.filter(comp -> comp.getGameComponentType() == GameComponentType.WELCOME_SCREEN).findFirst();
+		if (agc.isPresent())
+			if (agc.get() instanceof WelcomeScreen) // just to be on the very safe side
+				return (WelcomeScreen) agc.get();
+			else
+				return null;
+		else
+			return null;
+	}
+
+	public LevelCounter getLevelCounter() {
+		Optional<AbstractGameComponent> agc = allComponents.stream()
+				.filter(comp -> comp.getGameComponentType() == GameComponentType.LEVEL_COUNTER).findFirst();
+		if (agc.isPresent())
+			if (agc.get() instanceof LevelCounter) // just to be on the very safe side
+				return (LevelCounter) agc.get();
 			else
 				return null;
 		else

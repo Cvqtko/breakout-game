@@ -1,7 +1,7 @@
-package de.openhpi.capstone1.counter.builder;
+package de.openhpi.game.builder;
 
-import de.openhpi.capstone1.counter.model.Model;
-import de.openhpi.capstone1.counter.view.View;
+import de.openhpi.game.model.Model;
+import de.openhpi.game.view.View;
 import processing.core.PApplet;
 
 public class InteractiveGameBuilder implements Builder {

@@ -1,4 +1,4 @@
-package de.openhpi.capstone1.counter.model;
+package de.openhpi.game.model;
 
 public class Ball extends AbstractGameComponent {
 
@@ -9,9 +9,9 @@ public class Ball extends AbstractGameComponent {
 	public Ball(int xPos, int yPos, int width, int height, boolean isVisible) {
 		super(xPos - width / 2, yPos - width / 2, width, height, isVisible, GameComponentType.BALL);
 		this.radius = width / 2;
-        colorR = 244;
-        colorG = 79;
-        colorB = 65;
+		colorR = 244;
+		colorG = 79;
+		colorB = 65;
 	}
 
 	public int getRadius() {

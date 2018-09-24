@@ -1,6 +1,6 @@
-package de.openhpi.capstone1.counter.view;
+package de.openhpi.game.view;
 
-import de.openhpi.capstone1.counter.model.AbstractGameComponent;
+import de.openhpi.game.model.AbstractGameComponent;
 import processing.core.PApplet;
 
 public abstract class AbstractView {

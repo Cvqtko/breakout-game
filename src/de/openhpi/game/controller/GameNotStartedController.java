@@ -1,8 +1,10 @@
-package de.openhpi.capstone1.counter.controller;
+package de.openhpi.game.controller;
 
-import de.openhpi.capstone1.counter.model.*;
-import de.openhpi.capstone1.counter.view.View;
-import processing.core.PApplet;
+import de.openhpi.game.model.Ball;
+import de.openhpi.game.model.Model;
+import de.openhpi.game.model.Paddle;
+import de.openhpi.game.model.WelcomeScreen;
+import de.openhpi.game.view.View;
 
 public class GameNotStartedController implements Controller {
 
@@ -34,8 +36,10 @@ public class GameNotStartedController implements Controller {
 		Ball ball = model.getBall();
 
 		if (keyCode == 32) {
-			ball.setVelocityX(2);
-			ball.setVelocityY(-2);
+			ball.setVelocityX(model.getLevelCounter().getLevel());
+			ball.setVelocityY(-model.getLevelCounter().getLevel());
+			WelcomeScreen welcomeScreen = model.getWelcomeScreen();
+			welcomeScreen.setText("");
 		} else if (keyCode == 37) {
 			paddle.moveLeft();
 			ball.setxPos((int) paddle.getCenterX() - ball.getWidth() / 2);
@@ -50,5 +54,10 @@ public class GameNotStartedController implements Controller {
 
 	@Override
 	public void checkForCollisions() {
+	}
+
+	@Override
+	public boolean checkHasLevelEnded() {
+		return false;
 	}
 }

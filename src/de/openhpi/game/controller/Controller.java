@@ -1,4 +1,4 @@
-package de.openhpi.capstone1.counter.controller;
+package de.openhpi.game.controller;
 
 public interface Controller {
 	void handleMouseDragEvent(int mouseX);
@@ -6,4 +6,6 @@ public interface Controller {
 	void handleKetPressedEvent(int keyCode);
 
 	void checkForCollisions();
+
+	boolean checkHasLevelEnded();
 }

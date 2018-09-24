@@ -1,4 +1,4 @@
-package de.openhpi.capstone1.counter.model;
+package de.openhpi.game.model;
 
 public abstract class AbstractGameComponent {
 	private int xPos;

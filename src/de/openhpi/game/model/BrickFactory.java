@@ -1,6 +1,16 @@
-package de.openhpi.capstone1.counter.model;
+package de.openhpi.game.model;
 
 public class BrickFactory {
+
+//	Brick[] bricks;
+//
+//	public Brick[] getBricks(int playGroundWidth) {
+//		bricks = new Brick[1];
+//
+//		bricks[0] = new Brick(250, 100, 50, 20, true);
+//		return bricks;
+//
+//	}
 
 	Brick[] bricks;
 

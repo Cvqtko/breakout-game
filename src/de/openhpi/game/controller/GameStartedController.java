@@ -1,21 +1,14 @@
-package de.openhpi.capstone1.counter.controller;
+package de.openhpi.game.controller;
 
-import de.openhpi.capstone1.counter.model.AbstractGameComponent;
-import de.openhpi.capstone1.counter.model.Ball;
-import de.openhpi.capstone1.counter.model.Brick;
-import de.openhpi.capstone1.counter.model.Counter;
-import de.openhpi.capstone1.counter.model.Model;
-import de.openhpi.capstone1.counter.model.Paddle;
-import de.openhpi.capstone1.counter.view.View;
-import processing.core.PApplet;
+import de.openhpi.game.model.AbstractGameComponent;
+import de.openhpi.game.model.Ball;
+import de.openhpi.game.model.Brick;
+import de.openhpi.game.model.Model;
+import de.openhpi.game.model.WelcomeScreen;
+import de.openhpi.game.view.View;
 
 public class GameStartedController implements Controller {
 
-	// Paddle paddle;
-	// Ball ball;
-	// Brick[] bricks;
-	// PApplet display;
-	// Counter counter;
 	long collisionWithPaddleDetected;
 	Model model;
 	View view;
@@ -39,6 +32,17 @@ public class GameStartedController implements Controller {
 			model.getPaddle().moveRight(model.getPlayGroundWidth());
 
 		}
+	}
+
+	@Override
+	public boolean checkHasLevelEnded() {
+		boolean hasLevelEnded = true;
+		for (Brick brick : model.getBricks()) {
+			if (brick.getVisible()) {
+				hasLevelEnded = false;
+			}
+		}
+		return hasLevelEnded;
 	}
 
 	@Override
@@ -74,7 +78,9 @@ public class GameStartedController implements Controller {
 		}
 		// if ball goes below the display height stop the game
 		if (ball.getyPos() > model.getPlayGroundHeight()) {
-			view.stopLooping();
+			WelcomeScreen welcomeScreen = model.getWelcomeScreen();
+			welcomeScreen.setText("Game ended");
+			// view.stopLooping();
 		}
 	}
 
