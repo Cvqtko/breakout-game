@@ -1,9 +1,7 @@
 package de.openhpi.capstone1.counter.controller;
 
-import de.openhpi.capstone1.counter.model.Ball;
-import de.openhpi.capstone1.counter.model.Brick;
-import de.openhpi.capstone1.counter.model.Counter;
-import de.openhpi.capstone1.counter.model.Paddle;
+import de.openhpi.capstone1.counter.model.*;
+import de.openhpi.capstone1.counter.view.View;
 import processing.core.PApplet;
 
 public class GameControllerStrategy implements Controller {
@@ -12,9 +10,9 @@ public class GameControllerStrategy implements Controller {
 	private boolean isSpaceClicked = false;
 	
 
-	public GameControllerStrategy(Ball ball, Paddle paddle, Brick[] bricks, Counter counter, PApplet display) {
-		this.gameStartedController = new GameStartedController(ball, paddle, bricks, counter, display);
-		this.gameNotStartedController = new GameNotStartedController(ball, paddle, bricks, counter, display);
+	public GameControllerStrategy(Model model, View view, PApplet display) {
+		this.gameStartedController = new GameStartedController(model, view /*, display*/);
+		this.gameNotStartedController = new GameNotStartedController(model, view);
 	}
 
 	@Override

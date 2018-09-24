@@ -16,7 +16,7 @@ public class TheApp extends PApplet {
 	public void settings() {
 		theModel = new Model();
 		theView = new View(this);
-		size(theModel.getPlaygroundWidth(), theModel.getPlayGroundHeight());
+		size(theModel.getPlayGroundWidth(), theModel.getPlayGroundHeight());
 		
 		// size(1000, 600);
 	}

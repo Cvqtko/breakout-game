@@ -13,8 +13,8 @@ public class Model {
 	
 	//private Paddle paddle;
 	//private Ball ball;
-	private Brick[] bricks;
-	private Counter counter;
+	//private Brick[] bricks;
+	//private Counter counter;
 	
 	
 	public Model() {
@@ -32,8 +32,8 @@ public class Model {
 		
 		//paddle = null;
 		//ball = null;
-		counter = null;
-		bricks = null;
+		//counter = null;
+		//bricks = null;
 	}
 	
 	//public getter and setter methods
@@ -61,23 +61,32 @@ public class Model {
 	}
 
 	
-	public Brick[] getBricks() {
-		return bricks;
+	
+	 public Brick[] getBricks() {
+		 List<Brick> returnList = new ArrayList<Brick>();
+		 Brick[] returnArray = new Brick[1];
+				 allComponents.stream().filter(comp->comp.getGameComponentType()==GameComponentType.BRICK)
+				 .forEach(b->returnList.add((Brick)b));
+		return returnList.toArray(returnArray);
 	}
+	/*
 	public void setBricks(Brick[] bricks) {
 		this.bricks = bricks;
 	}
-	
+	*/
 	
 	public Counter getCounter() {
-		return counter;
-	}
-	public void setCounter(Counter counter) {
-		this.counter = counter;	
+		Optional<AbstractGameComponent> agc = allComponents.stream().filter(comp->comp.getGameComponentType()==GameComponentType.COUNTER).findFirst();
+		if (agc.isPresent())
+			if (agc.get() instanceof Counter) //just to be on the very safe side
+				return (Counter)agc.get();
+			else
+				return null;
+		else 
+			return null;
 	}
 	
-	
-	public int getPlaygroundWidth() {
+	public int getPlayGroundWidth() {
 		return playGroundWidth;
 	}
 	

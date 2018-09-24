@@ -21,9 +21,7 @@ public class View extends AbstractView {
 	}
 	
 	private void renderComponent(AbstractGameComponent gameComponent) {
-		
-		
-		
+				
 		switch (gameComponent.getGameComponentType()) {
 		case BALL:
 			display.fill(244, 79, 65);
@@ -49,6 +47,10 @@ public class View extends AbstractView {
 			break;
 		}
 
+	}
+	
+	public void stopLooping() {
+		display.noLoop();
 	}
 
 }

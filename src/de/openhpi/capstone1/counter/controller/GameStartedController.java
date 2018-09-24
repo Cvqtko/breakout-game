@@ -4,37 +4,39 @@ import de.openhpi.capstone1.counter.model.AbstractGameComponent;
 import de.openhpi.capstone1.counter.model.Ball;
 import de.openhpi.capstone1.counter.model.Brick;
 import de.openhpi.capstone1.counter.model.Counter;
+import de.openhpi.capstone1.counter.model.Model;
 import de.openhpi.capstone1.counter.model.Paddle;
+import de.openhpi.capstone1.counter.view.View;
 import processing.core.PApplet;
 
 public class GameStartedController implements Controller {
 
-	Paddle paddle;
-	Ball ball;
-	Brick[] bricks;
-	PApplet display;
-	Counter counter;
+	//Paddle paddle;
+	//Ball ball;
+	//Brick[] bricks;
+	//PApplet display;
+	//Counter counter;
 	long collisionWithPaddleDetected;
+	Model model;
+	View view;
 
-	public GameStartedController(Ball ball, Paddle paddle, Brick[] bricks, Counter counter, PApplet display) {
-		this.ball = ball;
-		this.paddle = paddle;
-		this.bricks = bricks;
-		this.display = display;
-		this.counter = counter;
+	public GameStartedController(Model model, View view /*, PApplet display */) {
+
+		this.model = model;
+		this.view = view;
 		collisionWithPaddleDetected = 0;
 	}
 
 	public void handleMouseDragEvent(int mouseX) {
-		paddle.move(display.width, mouseX);
+		model.getPaddle().move(model.getPlayGroundWidth(), mouseX);
 	}
 
 	@Override
 	public void handleKetPressedEvent(int keyCode) {
 		if (keyCode == 37) {
-			paddle.moveLeft();
+			model.getPaddle().moveLeft();
 		} else if (keyCode == 39) {
-			paddle.moveRight(display.width);
+			model.getPaddle().moveRight(model.getPlayGroundWidth());
 
 		}
 	}
@@ -44,24 +46,26 @@ public class GameStartedController implements Controller {
 		long currentTimeMillis = System.currentTimeMillis();
 		checkForCollisionBallAndDisplay();
 
-		for (Brick brick : bricks) {
+		for (Brick brick : model.getBricks()) {
 			if (brick.getVisible()) {
-				if (circleRectCollision(ball, brick)) {
-					counter.updateCount(brick.getPoints());
+				if (ballRectCollision(brick)) {
+					model.getCounter().updateCount(brick.getPoints());
 					brick.hasBeenHit();
 				}
 			}
 		}
 
 		if (currentTimeMillis - collisionWithPaddleDetected > 100) {
-			if (circleRectCollision(ball, paddle)) {
+			if (ballRectCollision(model.getPaddle())) {
 				this.collisionWithPaddleDetected = System.currentTimeMillis();
 			}
 		}
 	}
 
 	private void checkForCollisionBallAndDisplay() {
-		if (ball.getxPos() <= 0 || ball.getxPos() + ball.getWidth() >= display.width) {
+		// using a local variable ball, to keep the statements shorter
+		Ball ball = model.getBall();
+		if (ball.getxPos() <= 0 || ball.getxPos() + ball.getWidth() >= model.getPlayGroundWidth()) {
 
 			ball.setVelocityX(ball.getVelocityX() * -1); // Change ball movement direction
 		}
@@ -69,17 +73,20 @@ public class GameStartedController implements Controller {
 			ball.setVelocityY(ball.getVelocityY() * -1); // Change ball movement direction
 		}
 		// if ball goes below the display height stop the game
-		if (ball.getyPos() > display.height) {
-			display.noLoop();
+		if (ball.getyPos() > model.getPlayGroundHeight()) {
+			//display.noLoop();
+			view.stopLooping();
 		}
 	}
 
 	// Checks for collision between a Circle and a Rectangle
-	boolean circleRectCollision(Ball ball, AbstractGameComponent rect) {
-
+	// used for checking ball collisions only, as a ball is always part of a collision
+	boolean ballRectCollision(/*Ball ball,*/ AbstractGameComponent rect) {
+		// using a local variable ball, to keep the statements shorter
+		Ball ball = model.getBall();
 		float cx = ball.getCenterX();
 		float cy = ball.getCenterY();
-		float radius = ball.getRadius();
+		float radius = model.getBall().getRadius();
 		float rx = rect.getxPos();
 		float ry = rect.getyPos();
 		float rw = rect.getWidth();

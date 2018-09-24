@@ -51,9 +51,10 @@ public class InteractiveGame extends InteractiveComponent {
 		
 	 
 		// the brick rows
-		brickFactory = new BrickFactory();
-		bricks = brickFactory.getBricks();
-		for(AbstractGameComponent brick : bricks)
+		//brickFactory = new BrickFactory();
+		//bricks = brickFactory.getBricks();
+		//for(AbstractGameComponent brick : bricks)
+		for(AbstractGameComponent brick : (new BrickFactory()).getBricks())
 			model.addGameComponent(brick);
 		
 		// the counter
@@ -74,9 +75,9 @@ public class InteractiveGame extends InteractiveComponent {
 	}
 
 	public void addController() {
-		gameControllerStrategy = new GameControllerStrategy(model.getBall(), model.getPaddle(), bricks, counter, display);
+		gameControllerStrategy = new GameControllerStrategy(model, view, display);
 	}
-
+	
 	public void checkForCollisions() {
 		gameControllerStrategy.checkForCollisions();
 	}
