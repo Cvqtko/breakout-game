@@ -14,7 +14,7 @@ public class View extends AbstractView {
 		super(display);
 	}
 
-	public void UpdateComponents(List<AbstractGameComponent> components) {
+	public void updateComponents(List<AbstractGameComponent> components) {
 		display.background(204);
 		components.forEach(gameComponent -> renderComponent(gameComponent));
 	}

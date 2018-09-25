@@ -1,5 +1,7 @@
 package de.openhpi.game.view;
 
+import java.util.List;
+
 import de.openhpi.game.model.AbstractGameComponent;
 import processing.core.PApplet;
 
@@ -10,5 +12,6 @@ public abstract class AbstractView {
 		this.display = display;
 	}
 
+	public abstract void updateComponents(List<AbstractGameComponent> components);
 	public abstract void renderComponent(AbstractGameComponent gameComponent);
 }

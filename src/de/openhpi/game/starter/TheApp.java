@@ -4,13 +4,13 @@ import de.openhpi.game.BreakOutGame;
 import de.openhpi.game.controller.Controller;
 import de.openhpi.game.controller.GameControllerStrategy;
 import de.openhpi.game.model.Model;
-import de.openhpi.game.view.View;
+import de.openhpi.game.view.*;
 import processing.core.PApplet;
 
 public class TheApp extends PApplet {
 	BreakOutGame breakOutGame;
 	Model theModel;
-	View theView;
+	AbstractView theView;
     Controller theController;
     
 	@Override

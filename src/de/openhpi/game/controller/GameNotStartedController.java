@@ -1,18 +1,16 @@
 package de.openhpi.game.controller;
 
-import de.openhpi.game.model.Ball;
-import de.openhpi.game.model.Model;
-import de.openhpi.game.model.Paddle;
-import de.openhpi.game.model.WelcomeScreen;
-import de.openhpi.game.view.View;
+import de.openhpi.game.model.*;
+
+import de.openhpi.game.view.*;
 
 public class GameNotStartedController implements Controller {
 
 	long collisionWithPaddleDetected;
 	Model model;
-	View view;
+	AbstractView view;
 
-	public GameNotStartedController(Model model, View view /* , PApplet display */) {
+	public GameNotStartedController(Model model, AbstractView view) {
 		this.model = model;
 		this.view = view;
 		collisionWithPaddleDetected = 0;

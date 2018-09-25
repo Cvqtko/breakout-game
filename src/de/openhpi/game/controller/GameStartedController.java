@@ -1,20 +1,15 @@
 package de.openhpi.game.controller;
 
-import de.openhpi.game.model.AbstractGameComponent;
-import de.openhpi.game.model.Ball;
-import de.openhpi.game.model.Brick;
-import de.openhpi.game.model.Model;
-import de.openhpi.game.model.Score;
-import de.openhpi.game.model.WelcomeScreen;
-import de.openhpi.game.view.View;
+import de.openhpi.game.model.*;
+import de.openhpi.game.view.*;
 
 public class GameStartedController implements Controller {
 
 	long collisionWithPaddleDetected;
 	Model model;
-	View view;
+	AbstractView view;
 
-	public GameStartedController(Model model, View view) {
+	public GameStartedController(Model model, AbstractView view) {
 
 		this.model = model;
 		this.view = view;

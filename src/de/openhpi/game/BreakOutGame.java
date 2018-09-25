@@ -1,16 +1,15 @@
 package de.openhpi.game;
 
-import de.openhpi.game.controller.Controller;
-import de.openhpi.game.controller.GameControllerStrategy;
+import de.openhpi.game.controller.*;
 import de.openhpi.game.model.*;
-import de.openhpi.game.view.View;
+import de.openhpi.game.view.*;
 
 public class BreakOutGame extends InteractiveComponent {
 	Controller gameControllerStrategy;
 	Model model;
-	View view;
+	AbstractView view;
 
-	public BreakOutGame(Model model, View view, Controller controller) {
+	public BreakOutGame(Model model, AbstractView view, Controller controller) {
 		this.model = model;
 		this.view = view;
 		this.gameControllerStrategy = controller;
@@ -49,7 +48,7 @@ public class BreakOutGame extends InteractiveComponent {
 	@Override
 	public void update() {
 		this.model.getBall().move();
-		this.view.UpdateComponents(model.getGameComponents());
+		this.view.updateComponents(model.getGameComponents());
 		checkForCollisions();
 		if (checkHasLevelEnded()) {
 			startNewLevel();

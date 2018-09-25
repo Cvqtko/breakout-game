@@ -1,14 +1,14 @@
 package de.openhpi.game.controller;
 
 import de.openhpi.game.model.*;
-import de.openhpi.game.view.View;
+import de.openhpi.game.view.*;
 
 public class GameControllerStrategy implements Controller {
 	private Controller gameStartedController;
 	private Controller gameNotStartedController;
 	private boolean isSpaceClicked = false;  // if true, the ball is in play
 
-	public GameControllerStrategy(Model model, View view) {
+	public GameControllerStrategy(Model model, AbstractView view) {
 		this.gameStartedController = new GameStartedController(model, view);
 		this.gameNotStartedController = new GameNotStartedController(model, view);
 	}
