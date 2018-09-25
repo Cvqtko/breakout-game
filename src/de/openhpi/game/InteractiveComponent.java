@@ -1,7 +1,6 @@
-package de.openhpi.game.builder;
+package de.openhpi.game;
 
 public abstract class InteractiveComponent {
-	//protected AbstractView[] views;
 
 	public abstract void handleMouseDragEvent(int mouseX);
 

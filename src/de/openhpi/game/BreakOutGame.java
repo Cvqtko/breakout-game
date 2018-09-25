@@ -1,19 +1,20 @@
-package de.openhpi.game.builder;
+package de.openhpi.game;
 
 import de.openhpi.game.controller.Controller;
 import de.openhpi.game.controller.GameControllerStrategy;
 import de.openhpi.game.model.*;
 import de.openhpi.game.view.View;
 
-public class InteractiveGame extends InteractiveComponent {
+public class BreakOutGame extends InteractiveComponent {
 	Controller gameControllerStrategy;
-	Score counter;
 	Model model;
 	View view;
 
-	public InteractiveGame(Model model, View view) {
+
+	public BreakOutGame(Model model, View view, Controller controller) {
 		this.model = model;
 		this.view = view;
+		this.gameControllerStrategy = controller;
 	}
     
 	//adding the inventory to the game
@@ -37,10 +38,6 @@ public class InteractiveGame extends InteractiveComponent {
 		model.addGameComponent(new WelcomeScreen(230, model.getPlayGroundHeight() / 2, 0, 0, true));
 	}
 
-	public void addController() {
-		gameControllerStrategy = new GameControllerStrategy(model, view);
-	}
-
 	public void checkForCollisions() {
 		gameControllerStrategy.checkForCollisions();
 	}
@@ -60,7 +57,7 @@ public class InteractiveGame extends InteractiveComponent {
 	}
 
 	//Resetting the playground and initializing a new round
-	public void startNewLevel() {
+	private void startNewLevel() {
 		LevelCounter levelCounter = model.getLevelCounter();
 		levelCounter.setLevel(levelCounter.getLevel() + 1);
 

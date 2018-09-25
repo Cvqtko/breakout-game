@@ -6,7 +6,7 @@ import de.openhpi.game.view.View;
 public class GameControllerStrategy implements Controller {
 	private Controller gameStartedController;
 	private Controller gameNotStartedController;
-	private boolean isSpaceClicked = false;
+	private boolean isSpaceClicked = false;  // if true, the ball is in play
 
 	public GameControllerStrategy(Model model, View view) {
 		this.gameStartedController = new GameStartedController(model, view);
