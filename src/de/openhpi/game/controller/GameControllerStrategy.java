@@ -9,7 +9,7 @@ public class GameControllerStrategy implements Controller {
 	private boolean isSpaceClicked = false;
 
 	public GameControllerStrategy(Model model, View view) {
-		this.gameStartedController = new GameStartedController(model, view /* , display */);
+		this.gameStartedController = new GameStartedController(model, view);
 		this.gameNotStartedController = new GameNotStartedController(model, view);
 	}
 

@@ -2,19 +2,8 @@ package de.openhpi.game.model;
 
 public class BrickFactory {
 
-//	Brick[] bricks;
-//
-//	public Brick[] getBricks(int playGroundWidth) {
-//		bricks = new Brick[1];
-//
-//		bricks[0] = new Brick(250, 100, 50, 20, true);
-//		return bricks;
-//
-//	}
-
-	Brick[] bricks;
-
-	public Brick[] getBricks(int playGroundWidth) {
+	public static Brick[] getBricks(int playGroundWidth) {
+		Brick[] bricks;
 		int spaceLeftRight = ((playGroundWidth - 60) % 60) / 2 + 35;
 		int numberOfBricksPerRow = (playGroundWidth - 60) / 60;
 		bricks = new Brick[numberOfBricksPerRow * 3];
@@ -28,9 +17,7 @@ public class BrickFactory {
 			}
 			bricks[i] = new Brick(spaceLeftRight + counter, 10 + row, 50, 20, true);
 			counter += 60;
-
 		}
-
 		return bricks;
 	}
 

@@ -1,9 +1,7 @@
 package de.openhpi.game.builder;
 
-import de.openhpi.game.view.AbstractView;
-
 public abstract class InteractiveComponent {
-	protected AbstractView[] views;
+	//protected AbstractView[] views;
 
 	public abstract void handleMouseDragEvent(int mouseX);
 
@@ -11,5 +9,5 @@ public abstract class InteractiveComponent {
 
 	public abstract void update();
 
-	public abstract void handleKetPressedEvent(int keyCode);
+	public abstract void handleKeyPressedEvent(int keyCode);
 }

@@ -14,18 +14,20 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void settings() {
+		//initializing the model
 		theModel = new Model();
+		//initializing the view including a reference to the "PApplet" component of processing library
 		theView = new View(this);
+		
 		size(theModel.getPlayGroundWidth(), theModel.getPlayGroundHeight());
 
-		// size(1000, 600);
 	}
 
 	@Override
 	public void setup() { // setup() runs once
 		frameRate(theModel.getFrameRate());
 		InteractiveGameBuilder builder = new InteractiveGameBuilder(theModel, theView);
-		GUIComponent.construct(this, builder);
+		GUIComponent.construct(builder);
 		interactiveComponent = builder.getComponent();
 	}
 
@@ -42,6 +44,6 @@ public class TheApp extends PApplet {
 
 	@Override
 	public void keyPressed() {
-		interactiveComponent.handleKetPressedEvent(keyCode);
+		interactiveComponent.handleKeyPressedEvent(keyCode);
 	}
 }

@@ -1,14 +1,11 @@
 package de.openhpi.game.builder;
 
-import processing.core.PApplet;
-
 public class GUIComponent {
 	private GUIComponent() {}
 	
-	public static void construct(PApplet display, Builder builder) {
+	public static void construct(Builder builder) {
 		builder.buildComponent();
-		builder.buildModel(display);
-		builder.buildView(display);
+		builder.buildModel();
 		builder.buildController();
 	}
 }

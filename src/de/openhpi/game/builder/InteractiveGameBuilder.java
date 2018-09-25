@@ -20,13 +20,8 @@ public class InteractiveGameBuilder implements Builder {
 	}
 
 	@Override
-	public void buildModel(PApplet display) {
-		iGame.addModel(display);
-	}
-
-	@Override
-	public void buildView(PApplet display) {
-		iGame.createViews(display);
+	public void buildModel() {
+		iGame.addGameComponentsToModel();
 	}
 
 	@Override

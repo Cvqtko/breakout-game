@@ -14,7 +14,7 @@ public class GameStartedController implements Controller {
 	Model model;
 	View view;
 
-	public GameStartedController(Model model, View view /* , PApplet display */) {
+	public GameStartedController(Model model, View view) {
 
 		this.model = model;
 		this.view = view;
@@ -82,7 +82,6 @@ public class GameStartedController implements Controller {
 			Score score = model.getScore();
 			WelcomeScreen welcomeScreen = model.getWelcomeScreen();
 			welcomeScreen.setText("Game ended\nScore: " + score.getScore());
-			// view.stopLooping();
 		}
 	}
 
