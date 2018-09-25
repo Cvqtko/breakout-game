@@ -1,7 +1,8 @@
 package de.openhpi.game.starter;
 
 import de.openhpi.game.BreakOutGame;
-import de.openhpi.game.controller.*;
+import de.openhpi.game.controller.Controller;
+import de.openhpi.game.controller.GameControllerStrategy;
 import de.openhpi.game.model.Model;
 import de.openhpi.game.view.View;
 import processing.core.PApplet;

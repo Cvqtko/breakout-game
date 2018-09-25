@@ -10,32 +10,32 @@ public class BreakOutGame extends InteractiveComponent {
 	Model model;
 	View view;
 
-
 	public BreakOutGame(Model model, View view, Controller controller) {
 		this.model = model;
 		this.view = view;
 		this.gameControllerStrategy = controller;
 	}
-    
-	//adding the inventory to the game
-	//all compounds needed are added to the model here
+
+	// adding the inventory to the game
+	// all compounds needed are added to the model here
 	public void addGameComponentsToModel() {
-		//adding a paddle
+		// adding a paddle
 		model.addGameComponent(
 				new Paddle(0, model.getPlayGroundHeight() - 20, model.getPlayGroundWidth() / 6, 10, true));
-		
-		//adding a ball and placing it on top of the paddle
+
+		// adding a ball and placing it on top of the paddle
 		model.addGameComponent(new Ball((int) (model.getPaddle().getCenterX()),
 				(int) (model.getPaddle().getyPos() - model.getPaddle().getHeight()), 20, 20, true));
-        
-		//producing some bricks (number of bricks depends on the playground width
+
+		// producing some bricks (number of bricks depends on the playground width
 		for (AbstractGameComponent brick : BrickFactory.getBricks(model.getPlayGroundWidth()))
 			model.addGameComponent(brick);
-		
-		//adding Score, level counter and welcome screen
+
+		// adding Score, level counter and welcome screen
 		model.addGameComponent(new Score(10, 20, 100, 30, true));
 		model.addGameComponent(new LevelCounter(model.getPlayGroundWidth() - 60, 20, 0, 0, true));
-		model.addGameComponent(new WelcomeScreen(230, model.getPlayGroundHeight() / 2, 0, 0, true));
+		model.addGameComponent(
+				new WelcomeScreen(model.getPlayGroundWidth() / 2 - 70, model.getPlayGroundHeight() / 2, 0, 0, true));
 	}
 
 	public void checkForCollisions() {
@@ -56,7 +56,7 @@ public class BreakOutGame extends InteractiveComponent {
 		}
 	}
 
-	//Resetting the playground and initializing a new round
+	// Resetting the playground and initializing a new round
 	private void startNewLevel() {
 		LevelCounter levelCounter = model.getLevelCounter();
 		levelCounter.setLevel(levelCounter.getLevel() + 1);
@@ -69,9 +69,9 @@ public class BreakOutGame extends InteractiveComponent {
 		ball.setVelocityX(0);
 		ball.setVelocityY(0);
 
-		//remove the 'old bricks' from the model
+		// remove the 'old bricks' from the model
 		model.removeAllBricks();
-		//add a new set of bricks for the next level
+		// add a new set of bricks for the next level
 		for (AbstractGameComponent brick : BrickFactory.getBricks(model.getPlayGroundWidth()))
 			model.addGameComponent(brick);
 	}

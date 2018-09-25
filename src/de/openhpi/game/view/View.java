@@ -53,7 +53,6 @@ public class View extends AbstractView {
 		case WELCOME_SCREEN:
 			display.fill(0, 102, 153);
 			display.textSize(20);
-
 			display.text(((WelcomeScreen) gameComponent).getText(), gameComponent.getxPos(), gameComponent.getyPos());
 			break;
 		default: // if another component type should occur, just do nothing as currently not

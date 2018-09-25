@@ -20,13 +20,16 @@ public class Model {
 	public void InitializeGameSettings() {
 		// Here are done some basic settings.
 		// these settings could be loaded from a configuration file too.
+		// playGroundWidth can vary from 120 to 1366, playGroundWidth can vary from 200
+		// to 700
+		// recommended settings are 600/400
 		playGroundWidth = 600;
 		playGroundHeight = 400;
 		frameRate = 200;
 
 	}
-	
-    // getBall returns the instance of the Paddle (game component) used in the game 
+
+	// getBall returns the instance of the Paddle (game component) used in the game
 	public Paddle getPaddle() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
 				.filter(comp -> comp.getGameComponentType() == GameComponentType.PADDLE).findFirst();
@@ -38,8 +41,8 @@ public class Model {
 		else
 			return null;
 	}
-	
-    // getBall returns the instance of the Ball (game component) used in the game 
+
+	// getBall returns the instance of the Ball (game component) used in the game
 	public Ball getBall() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
 				.filter(comp -> comp.getGameComponentType() == GameComponentType.BALL).findFirst();
@@ -51,8 +54,8 @@ public class Model {
 		else
 			return null;
 	}
-	
-    // getBricks returns an array of brick (game components) containing all bricks  
+
+	// getBricks returns an array of brick (game components) containing all bricks
 	public Brick[] getBricks() {
 		List<Brick> returnList = new ArrayList<Brick>();
 		Brick[] returnArray = new Brick[1];
@@ -61,7 +64,7 @@ public class Model {
 		return returnList.toArray(returnArray);
 	}
 
-    // getScore returns the instance of the score (game component) used in the game  
+	// getScore returns the instance of the score (game component) used in the game
 	public Score getScore() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
 				.filter(comp -> comp.getGameComponentType() == GameComponentType.SCORE).findFirst();
@@ -73,8 +76,9 @@ public class Model {
 		else
 			return null;
 	}
-	
-    // getWelcomeScreen returns the instance of the welcome screen (game component) used in the game
+
+	// getWelcomeScreen returns the instance of the welcome screen (game component)
+	// used in the game
 	public WelcomeScreen getWelcomeScreen() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
 				.filter(comp -> comp.getGameComponentType() == GameComponentType.WELCOME_SCREEN).findFirst();
@@ -86,8 +90,9 @@ public class Model {
 		else
 			return null;
 	}
-	
-    // getLevelCounter returns the instance of the level counter (game component) used in the game
+
+	// getLevelCounter returns the instance of the level counter (game component)
+	// used in the game
 	public LevelCounter getLevelCounter() {
 		Optional<AbstractGameComponent> agc = allComponents.stream()
 				.filter(comp -> comp.getGameComponentType() == GameComponentType.LEVEL_COUNTER).findFirst();
@@ -99,7 +104,7 @@ public class Model {
 		else
 			return null;
 	}
-	
+
 	// getPlayGroundWidth returns the width of the applicaton screen
 	public int getPlayGroundWidth() {
 		return playGroundWidth;
@@ -109,8 +114,8 @@ public class Model {
 	public int getPlayGroundHeight() {
 		return playGroundHeight;
 	}
-	
-    // getFrameRate returns the FrameRate used (the frequency processing (re-)Draws 
+
+	// getFrameRate returns the FrameRate used (the frequency processing (re-)Draws
 	public int getFrameRate() {
 		return frameRate;
 	}
@@ -121,21 +126,23 @@ public class Model {
 			allComponents.add(abstractGameComponent);
 	}
 
-    // getGameComponents() provides a copy of the all components list (components contained
-	//                    still are references to the original objects
+	// getGameComponents() provides a copy of the all components list (components
+	// contained
+	// still are references to the original objects
 	public List<AbstractGameComponent> getGameComponents() {
 		List<AbstractGameComponent> returnList = new ArrayList<AbstractGameComponent>();
 		allComponents.forEach(component -> returnList.add(component));
 		return returnList;
 	}
-    
-	// removeAllBricks deletes all Bricks contained in the Model respectively in the allComponents list
+
+	// removeAllBricks deletes all Bricks contained in the Model respectively in the
+	// allComponents list
 	public void removeAllBricks() {
 		List<AbstractGameComponent> deletionList = new ArrayList<AbstractGameComponent>();
 		allComponents.stream().filter(comp -> comp.getGameComponentType() == GameComponentType.BRICK)
-		             .forEach(deletionList::add);
+				.forEach(deletionList::add);
 		deletionList.forEach(comp -> allComponents.remove(comp));
-		deletionList = null;	
+		deletionList = null;
 	}
-	
+
 }
