@@ -6,10 +6,9 @@ public class GameStartedController implements Controller {
 
 	private static final int KEY_LEFT = 37;
 	private static final int KEY_RIGHT = 39;
-	
+
 	private long collisionWithPaddleDetected;
 	private Model model;
-
 
 	public GameStartedController(Model model) {
 
@@ -55,7 +54,8 @@ public class GameStartedController implements Controller {
 				}
 			}
 		}
-
+		// We calculate the time in milliseconds between ball and paddle
+		// collision, so that no 2 consecutive collisions are allowed
 		if (currentTimeMillis - collisionWithPaddleDetected > 100) {
 			if (ballRectCollision(model.getPaddle())) {
 				this.collisionWithPaddleDetected = System.currentTimeMillis();
