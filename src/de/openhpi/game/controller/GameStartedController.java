@@ -1,18 +1,19 @@
 package de.openhpi.game.controller;
 
 import de.openhpi.game.model.*;
-import de.openhpi.game.view.*;
 
 public class GameStartedController implements Controller {
 
-	long collisionWithPaddleDetected;
-	Model model;
-	AbstractView view;
+	private static final int KEY_LEFT = 37;
+	private static final int KEY_RIGHT = 39;
+	
+	private long collisionWithPaddleDetected;
+	private Model model;
 
-	public GameStartedController(Model model, AbstractView view) {
+
+	public GameStartedController(Model model) {
 
 		this.model = model;
-		this.view = view;
 		collisionWithPaddleDetected = 0;
 	}
 
@@ -22,9 +23,9 @@ public class GameStartedController implements Controller {
 
 	@Override
 	public void handleKetPressedEvent(int keyCode) {
-		if (keyCode == 37) {
+		if (keyCode == KEY_LEFT) {
 			model.getPaddle().moveLeft();
-		} else if (keyCode == 39) {
+		} else if (keyCode == KEY_RIGHT) {
 			model.getPaddle().moveRight(model.getPlayGroundWidth());
 
 		}
@@ -156,7 +157,7 @@ public class GameStartedController implements Controller {
 				} else {
 					ball.setVelocityY(ball.getVelocityY() * -1);
 				}
-			} // collision with tob/bottom side
+			} // collision with top/bottom side
 			else if (testX == cx) {
 				ball.setVelocityY(ball.getVelocityY() * -1);
 

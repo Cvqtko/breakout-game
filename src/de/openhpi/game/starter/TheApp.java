@@ -1,8 +1,7 @@
 package de.openhpi.game.starter;
 
 import de.openhpi.game.BreakOutGame;
-import de.openhpi.game.controller.Controller;
-import de.openhpi.game.controller.GameControllerStrategy;
+import de.openhpi.game.controller.*;
 import de.openhpi.game.model.Model;
 import de.openhpi.game.view.*;
 import processing.core.PApplet;
@@ -20,7 +19,7 @@ public class TheApp extends PApplet {
 		//initializing the view including a reference to the "PApplet" component of processing library
 		theView = new View(this);
 		//initializing the controller
-		theController  = new GameControllerStrategy(theModel, theView);
+		theController  = new GameControllerStrategy(theModel);
 		
 		size(theModel.getPlayGroundWidth(), theModel.getPlayGroundHeight());
 

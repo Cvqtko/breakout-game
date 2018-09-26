@@ -2,18 +2,16 @@ package de.openhpi.game.controller;
 
 import de.openhpi.game.model.*;
 
-import de.openhpi.game.view.*;
-
 public class GameNotStartedController implements Controller {
 
-	long collisionWithPaddleDetected;
-	Model model;
-	AbstractView view;
+	private static final int KEY_LEFT = 37;
+	private static final int KEY_RIGHT = 39;
+	private static final int KEY_SPACE = 32;
+	
+	private Model model;
 
-	public GameNotStartedController(Model model, AbstractView view) {
+	public GameNotStartedController(Model model) {
 		this.model = model;
-		this.view = view;
-		collisionWithPaddleDetected = 0;
 	}
 
 	public void handleMouseDragEvent(int mouseX) {
@@ -33,16 +31,16 @@ public class GameNotStartedController implements Controller {
 		Paddle paddle = model.getPaddle();
 		Ball ball = model.getBall();
 
-		if (keyCode == 32) {
+		if (keyCode == KEY_SPACE) {
 			ball.setVelocityX(model.getLevelCounter().getLevel());
 			ball.setVelocityY(-model.getLevelCounter().getLevel());
 			WelcomeScreen welcomeScreen = model.getWelcomeScreen();
 			welcomeScreen.setText("");
-		} else if (keyCode == 37) {
+		} else if (keyCode == KEY_LEFT) {
 			paddle.moveLeft();
 			ball.setxPos((int) paddle.getCenterX() - ball.getWidth() / 2);
 			ball.setyPos(paddle.getyPos() - ball.getHeight());
-		} else if (keyCode == 39) {
+		} else if (keyCode == KEY_RIGHT) {
 			paddle.moveRight(model.getPlayGroundWidth());
 			ball.setxPos((int) paddle.getCenterX() - ball.getWidth() / 2);
 			ball.setyPos(paddle.getyPos() - ball.getHeight());
