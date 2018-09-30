@@ -25,7 +25,7 @@ public class Model {
 		// recommended settings are 600/400
 		playGroundWidth = 600;
 		playGroundHeight = 400;
-		frameRate = 200;
+		frameRate = 360;
 
 	}
 
